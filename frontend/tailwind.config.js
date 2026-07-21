@@ -1,10 +1,10 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -31,7 +31,8 @@ const config: Config = {
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
-        'float': 'float 6s ease-in-out infinite'
+        'float': 'float 6s ease-in-out infinite',
+        'spin-slow': 'spinSlow 20s linear infinite'
       },
       keyframes: {
         pulseGlow: {
@@ -41,10 +42,13 @@ const config: Config = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' }
+        },
+        spinSlow: {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(360deg)' }
         }
       }
     },
   },
   plugins: [],
 };
-export default config;
