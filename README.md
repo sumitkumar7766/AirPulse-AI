@@ -1,122 +1,89 @@
-# AirPulse AI 🌬️🌍
+# 🌬️ AirPulse AI – Smart Urban Air Quality Intelligence Platform
 
-> **Environmental Intelligence & Air Quality Index (AQI) Forecasting Platform**
+> **Palantir Gotham / ArcGIS Intelligence class AI-Powered Decision Platform for Proactive Urban Air Quality Monitoring & Forecasting**
 
-AirPulse AI is a full-stack monorepo web application designed to monitor, analyze, and forecast air quality metrics globally using real-time atmospheric data, geospatial hotspot tracking, 3D atmospheric globe visualizations, and an intelligent AI Copilot agent.
+AirPulse AI is a complete full-stack monorepo built for hackathons and smart city command centers. It moves city administrators from reactive pollution monitoring to proactive, AI-driven pollution prevention.
+
+📄 **Full Technical Specification & Architectural Document**: See [PROJECT_DETAILS.md](./PROJECT_DETAILS.md)
 
 ---
 
-## 🏗 Project Architecture
+## 🏛 Architecture Overview
 
 ```text
 airpulse-ai/
-├── frontend/             # Next.js 15 App Router + Tailwind CSS + Three.js + Leaflet
+├── frontend/                     # Next.js 15 App Router + Tailwind CSS + Three.js + Leaflet
 │   ├── src/
-│   │   ├── app/          # Next.js App Router pages
-│   │   ├── components/   # UI & Visualization components (3D Globe, Maps, Charts)
-│   │   ├── hooks/        # React Query hooks
-│   │   ├── lib/          # Utilities
-│   │   ├── services/     # Axios API service layer (`api.ts`)
-│   │   ├── types/        # TypeScript declarations
+│   │   ├── app/                 # App Router (layout.tsx, page.tsx, globals.css)
+│   │   ├── components/          # Sidebar, Header, AuthModal, Globe3D, HotspotMap, AQICharts, AICopilot
+│   │   │   └── views/           # 13 Dedicated Module Views
+│   │   ├── hooks/               # Custom React Query hooks (useAirPulseData.ts)
+│   │   ├── lib/                 # React Query Client & Providers
+│   │   ├── services/            # Centralized Axios API service layer (api.ts)
+│   │   └── types/               # TypeScript interfaces (index.ts)
+│   ├── .env.local               # NEXT_PUBLIC_API_URL=http://localhost:5000/api
 │   └── package.json
 │
-├── backend/              # Node.js + Express + TypeScript + MongoDB
+├── backend/                      # Express.js + TypeScript + MongoDB Atlas
 │   ├── src/
-│   │   ├── config/       # MongoDB Connection & configuration
-│   │   ├── controllers/  # REST API Controllers
-│   │   ├── routes/       # Express Route definitions
-│   │   ├── models/       # 10 Mongoose Data Models
-│   │   ├── middlewares/  # Express middlewares (CORS, Error Handlers)
-│   │   ├── services/     # Seed & Data Services
-│   │   ├── agents/       # AI Copilot Environmental Specialist Agent
-│   │   └── server.ts     # Express entrypoint
+│   │   ├── config/              # MongoDB connection & fallback dataset mode
+│   │   ├── agents/              # 6 AI Agents (Forecast, Attribution, Hotspot, Enforcement, Health, SmartCity)
+│   │   ├── controllers/         # REST API Controllers
+│   │   ├── routes/              # Express API Routes
+│   │   ├── models/              # 11 Mongoose Schemas
+│   │   ├── middlewares/         # Express CORS (http://localhost:3000) & Error Handler
+│   │   ├── services/            # Multi-City Seed Service
+│   │   └── server.ts            # Express entrypoint (Port 5000)
+│   ├── .env                     # PORT=5000, MONGODB_URI, OPENAI_API_KEY, FRONTEND_URL
 │   └── package.json
 │
 ├── README.md
+├── PROJECT_DETAILS.md
 ├── package.json
 └── .gitignore
 ```
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 The 13 Core Modules
 
-### Prerequisites
-- Node.js >= 18.x
-- npm >= 9.x
-- MongoDB (Optional: Backend includes seamless mock seed fallback if `MONGODB_URI` is unconfigured)
-
-### Installation
-
-Install root and concurrent tooling:
-```bash
-npm install
-```
-
-Install backend dependencies:
-```bash
-cd backend
-npm install
-```
-
-Install frontend dependencies:
-```bash
-cd ../frontend
-npm install
-```
+1. **Demo Role Login**: Persona switcher for Administrator, Pollution Control Officer, City Planner.
+2. **Module 1: Smart Dashboard**: 8 core indicators, Recharts 24h/7d/30d trend curves, Recharts Source Breakdown pie chart, AI Executive summary card.
+3. **Module 2: Air Quality Intelligence Map**: Full-screen GIS map (Leaflet) with togglable layers (Heatmap, Stations, Traffic, Weather, Hotspots, Satellite NO2) and interactive popups.
+4. **Module 3: AQI Forecasting Engine**: 24h, 48h, 72h, 7-day predictions with confidence scores (94.2%) and AI explanations.
+5. **Module 4: Pollution Source Attribution**: Sectoral chemical speciation (Traffic: 52%, Construction: 22%, Industry: 15%, Waste Burning: 6%, Domestic: 5%).
+6. **Module 5: Pollution Hotspot Detection**: Hotspot vector map & Actionable inspection priority table.
+7. **Module 6: Enforcement Intelligence**: AI dispatch engine guiding inspector teams, construction halts, and heavy vehicle bans.
+8. **Module 7: Satellite Intelligence**: ESA Sentinel-5P TROPOMI & NASA MODIS column gas densities (NO2, SO2, CO, aerosol index, urban heat island LST anomaly).
+9. **Module 8: AI Copilot**: Interactive chat assistant powered by REST API `POST /api/copilot` and 6 backend AI agents.
+10. **Module 9: Citizen Health Advisory**: Targeted guidance for 6 demographics (Children, Seniors, Asthma Patients, Pregnant Women, Outdoor Workers, General Citizens).
+11. **Module 10: Multi-City Intelligence**: Comparative benchmark across 9 Indian hubs (Delhi, Mumbai, Bhopal, Indore, Pune, Hyderabad, Bengaluru, Chennai, Kolkata).
+12. **Module 11: Smart City Recommendations**: Proactive structural policy interventions.
+13. **Module 12: 3D Smart City Digital Twin (WOW Factor)**: Three.js / React Three Fiber interactive 3D city scene with buildings, roads, industrial stacks, animated pollution clouds, moving vehicles, color-coded Green/Yellow/Red/Purple AQI risk zones, and zone click interactions.
+14. **Module 13: Analytics**: Ward rankings & severity directory.
 
 ---
 
-## 💻 Running the Application
+## 🤖 Backend 6 AI Agents
 
-### Option 1: Run Concurrently from Root
-```bash
-npm run dev
-```
-
-### Option 2: Run Separately
-
-**Backend Server (Port 5000):**
-```bash
-cd backend
-npm run dev
-```
-Backend API will be accessible at: `http://localhost:5000/api`
-
-**Frontend Web App (Port 3000):**
-```bash
-cd frontend
-npm run dev
-```
-Frontend App will be accessible at: `http://localhost:3000`
+1. **AQI Forecast Agent** (`aqiForecastAgent.ts`): Multi-horizon neural predictive trajectory modeling.
+2. **Pollution Attribution Agent** (`pollutionAttributionAgent.ts`): Chemical speciation root-cause breakdown.
+3. **Hotspot Detection Agent** (`hotspotDetectionAgent.ts`): Geospatial risk score clustering.
+4. **Enforcement Agent** (`enforcementAgent.ts`): Inspector team dispatch strategy.
+5. **Health Advisory Agent** (`healthAdvisoryAgent.ts`): Demographic medical advice generator.
+6. **Smart City Agent** (`smartCityAgent.ts`): Long-term urban planning interventions.
 
 ---
 
-## 🛰 REST API Endpoints
+## 💻 Quick Start & Commands
 
-- `GET /api/dashboard` - Unified overview metrics (Current AQI, Predicted AQI, Hotspots, Active Alerts)
-- `GET /api/aqi` - Live and historical AQI telemetry
-- `GET /api/forecasts` - 7-day predictive AI forecast model data
-- `GET /api/hotspots` - Geospatial pollution hotspots with coordinate mapping
-- `POST /api/copilot` - Interactive AI Copilot environmental query analysis
-- `GET /api/analytics` - Pollutant gas breakdown (PM2.5, PM10, NO2, O3, CO, SO2)
-- `GET /api/health-advisories` - Target population guidance & activity indices
-- `GET /api/satellite-data` - Sentinel-5P column density telemetry
-- `POST /api/seed` - Database seeder reset/init endpoint
+```bash
+# Install root dependencies
+npm install
 
----
-
-## 🔐 Environment Variables
-
-### Backend (`backend/.env`)
-```env
-PORT=5000
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/airpulse
-OPENAI_API_KEY=your-openai-api-key-optional
-FRONTEND_URL=http://localhost:3000
+# Run Frontend (Port 3000) & Backend (Port 5000) Concurrently
+npm run dev
 ```
 
-### Frontend (`frontend/.env.local`)
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-```
+- **Frontend App**: `http://localhost:3000`
+- **Backend REST API**: `http://localhost:5000/api`
