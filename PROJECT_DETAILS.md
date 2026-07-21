@@ -8,13 +8,32 @@
 
 **AirPulse AI** transforms urban air quality management from *reactive pollution monitoring* to *proactive, AI-driven pollution prevention*. 
 
-Traditional air quality platforms only display static AQI numbers. AirPulse AI is an **AI-Powered Decision Intelligence System** that continuously predicts pollution trends, attributes root causes to specific urban sectors (traffic, industrial, biomass, construction), detects high-risk geospatial hotspots, dispatches enforcement inspection teams, generates satellite column density telemetry, provides demographic medical advisories, and simulates urban microclimates using an interactive **3D Smart City Digital Twin**.
+Traditional air quality platforms only display static AQI numbers. AirPulse AI is an **AI-Powered Decision Intelligence System** that continuously predicts pollution trends, attributes root causes to specific urban sectors (traffic, industrial, biomass, construction), detects high-risk geospatial hotspots, dispatches enforcement inspection teams, generates satellite column density telemetry, provides demographic medical advisories, simulates urban microclimates using an interactive **3D Smart City Digital Twin**, and provides **10 Proprietary AI USP Modules** backed by a dedicated **Python Machine Learning Engine**.
+
+---
+
+## 🚀 10 Unique AI-Powered USP Modules (Winner Features)
+
+| # | USP Module Name | Route URL | Feature Architecture & Capability |
+|:---|:---|:---|:---|
+| **USP 1** | **🧠 AI Intervention Simulator** | `/simulator` | **Winner Feature**: Interactive sliders (*Traffic Reduction %, Construction Dust %, Industrial Cut %, Waste Control %, Trees Planted & Green Expansion %*). Real-time AI prediction calculation (Before AQI 280 vs After AQI 175, 37% pollution reduction, 24% health risk cut, 18% population reduction) + Before/After charts. |
+| **USP 2** | **🏆 Environmental Intelligence Score** | `/environmental-score` | Proprietary 0–100 city scoring engine based on *AQI, Green Cover, Traffic, Weather, Complaints & Growth Rate*. Circular score cards & Leaderboard (Bhopal 78/100, Indore 72/100, Delhi 42/100). |
+| **USP 3** | **📢 Citizen Complaint + AI Verification** | `/citizen-complaints` | Citizens submit photos & complaints (*Waste Burning, Industrial Smoke, Construction Dust*). Computer Vision AI automatically verifies issue, assigns confidence score (94%) & triggers enforcement dispatch. |
+| **USP 4** | **📡 Pollution Risk Radar** | `/risk-radar` | City-wide multi-factor risk engine combining AQI, meteorology, satellite NO2 & thermal inversion. Interactive Radar Chart & 24h/48h/72h risk horizon cards. |
+| **USP 5** | **📰 Pollution Story Generator** | `/story-generator` | One-click AI report synthesis (*Today, Weekly, Monthly, Emergency Alert Reports*) with PDF export, email & social share triggers. |
+| **USP 6** | **🌳 Green Zone Recommendation Engine** | `/green-zones` | Machine learning identifies high-impact target locations for *Miyawaki urban forests, green corridors & park expansion* with expected AQI improvement metrics. |
+| **USP 7** | **⏳ Air Quality Time Machine** | `/time-machine` | Historical environmental intelligence module. Interactive playback slider to travel back through 7D, 30D, 6M, 1Y historical telemetry. |
+| **USP 8** | **⚔️ Smart City Battle Mode** | `/battle-mode` | Head-to-head city confrontation engine (*Bhopal vs Delhi vs Mumbai vs Indore vs Pune*). AI summary comparison: *"Bhopal performs 31% better than Delhi"*. |
+| **USP 9** | **🩺 Health Impact Analyzer** | `/health-impact` | Predicts physiological pollution impact on vulnerable groups (*Children, Senior Citizens, Asthma Patients, Outdoor Workers*) & estimates hospital ER admission loads. |
+| **USP 10** | **🤖 Advanced AI Copilot** | `/copilot` | Upgraded agentic assistant utilizing live context from all forecasts, hotspots, complaints, scores & intervention simulations to generate actionable municipal action plans. |
 
 ---
 
 ## 🏗 Full Monorepo Architecture
 
-The platform follows a clean, production-ready monorepo structure with complete separation of concerns between Frontend and Backend:
+The platform follows a production-grade 3-tier monorepo architecture:
+
+$$\text{Next.js 15 Frontend (Port 3000)} \longrightarrow \text{Express Node.js Backend (Port 5000)} \longrightarrow \text{Python ML Microservice (Port 8000)}$$
 
 ```text
 ET Hackathon/ (Workspace Root)
@@ -25,63 +44,67 @@ ET Hackathon/ (Workspace Root)
 │
 ├── frontend/                      # Next.js 15 Web Application (Port 3000)
 │   ├── src/
-│   │   ├── app/                   # App Router pages (layout.tsx, page.tsx, globals.css)
-│   │   ├── components/            # Reusable UI & Core Visualizers
-│   │   │   ├── Header.tsx         # Glassmorphism Top Navigation & Live Telemetry Status
-│   │   │   ├── Sidebar.tsx        # 13-Module Enterprise Navigation & Role Indicator
-│   │   │   ├── AuthModal.tsx      # Demo Persona Auth Switcher (Admin, Inspector, Planner)
-│   │   │   ├── MetricsOverview.tsx# Top Dashboard Indicator Cards
-│   │   │   ├── Globe3D.tsx        # Three.js 3D Atmospheric Earth Sphere Mesh
-│   │   │   ├── HotspotMap.tsx     # Vector Hotspot GIS Map & Telemetry Radar
-│   │   │   ├── AQICharts.tsx      # Recharts Diurnal 24h Cycles & 7d Trajectory Curves
-│   │   │   ├── HealthAdvisoryCard.tsx # Demographic Exposure Protocols
-│   │   │   ├── SatelliteCard.tsx  # Sentinel-5P Satellite Column Density Card
-│   │   │   ├── AICopilot.tsx      # Interactive Floating AI Assistant Drawer
-│   │   │   ├── MotionWrapper.tsx  # Framer Motion Hydration Helper
-│   │   │   └── views/             # 13 Dedicated Module Pages
-│   │   │       ├── DashboardView.tsx       # Module 1: Smart Dashboard
-│   │   │       ├── IntelligenceMapView.tsx # Module 2: Air Quality Intelligence Map
-│   │   │       ├── ForecastView.tsx        # Module 3: AQI Forecasting Engine
-│   │   │       ├── AttributionView.tsx     # Module 4: Pollution Source Attribution
-│   │   │       ├── HotspotView.tsx         # Module 5: Pollution Hotspot Detection
-│   │   │       ├── EnforcementView.tsx     # Module 6: Enforcement Intelligence
-│   │   │       ├── SatelliteView.tsx       # Module 7: Satellite Intelligence
-│   │   │       ├── CopilotView.tsx         # Module 8: Full AI Copilot Page
-│   │   │       ├── HealthAdvisoryView.tsx  # Module 9: Citizen Health Advisory
-│   │   │       ├── MultiCityView.tsx       # Module 10: Multi-City Intelligence
-│   │   │       ├── RecommendationsView.tsx # Module 11: Smart City Recommendations
-│   │   │       ├── DigitalTwin3D.tsx       # Module 12: 3D Smart City Digital Twin (WOW Factor)
-│   │   │       ├── AnalyticsView.tsx       # Module 13: Municipal Ward Analytics
-│   │   │       └── SettingsView.tsx        # Command Settings & Seeder Control
-│   │   ├── hooks/                 # Custom React Query Hooks (`useAirPulseData.ts`)
-│   │   ├── lib/                   # React Query Client & Providers
-│   │   ├── services/              # Centralized Axios REST API Layer (`api.ts`)
-│   │   └── types/                 # TypeScript Data Contracts (`index.ts`)
-│   ├── .env.local                 # NEXT_PUBLIC_API_URL=http://localhost:5000/api
+│   │   ├── app/                   # App Router pages (28 Subroutes)
+│   │   │   ├── simulator/         # USP 1: AI Intervention Simulator Page
+│   │   │   ├── environmental-score/ # USP 2: Env Intelligence Score Page
+│   │   │   ├── citizen-complaints/# USP 3: Citizen Complaints AI Verification
+│   │   │   ├── risk-radar/        # USP 4: Pollution Risk Radar Page
+│   │   │   ├── story-generator/   # USP 5: Pollution Story Generator Page
+│   │   │   ├── green-zones/       # USP 6: Green Zone Recommendation Engine
+│   │   │   ├── time-machine/      # USP 7: Air Quality Time Machine Page
+│   │   │   ├── battle-mode/       # USP 8: Smart City Battle Mode Page
+│   │   │   ├── health-impact/     # USP 9: Health Impact Analyzer Page
+│   │   │   ├── copilot/           # USP 10: Advanced AI Copilot Page
+│   │   │   ├── dashboard/         # 1:1 Dashboard Command Center
+│   │   │   ├── login/             # 1:1 Light-Theme 3D Isometric Login Page
+│   │   │   └── ...                # Map, Forecast, Hotspots, Attribution, Digital Twin
+│   │   ├── components/            # Reusable Visualizer Components
+│   │   │   ├── Header.tsx         # Top Header with Weather (25°C), Date & Live Telemetry
+│   │   │   ├── Sidebar.tsx        # Enterprise Navigation Bar with 10 USP Badges
+│   │   │   ├── views/             # Module Views (InterventionSimulatorView, EnvScoreView, etc.)
+│   │   │   └── DigitalTwin3D.tsx  # 3D City Microclimate Canvas (Three.js)
+│   │   └── services/              # Axios REST API Layer
 │   ├── package.json
-│   ├── tsconfig.json
-│   ├── tailwind.config.ts
+│   ├── tailwind.config.js
 │   └── next.config.js
 │
-└── backend/                       # Express + TypeScript Server (Port 5000)
+├── backend/                       # Express + TypeScript Server (Port 5000)
+│   ├── src/
+│   │   ├── config/                # MongoDB Atlas Connection & In-Memory Fallback (`db.ts`)
+│   │   ├── controllers/           # Handlers for 15 Modules (uspController, forecastController, etc.)
+│   │   ├── routes/                # Express Route Bindings (`index.ts`, `uspRoutes.ts`)
+│   │   ├── services/              # Python ML Proxy Service (`mlService.ts`)
+│   │   └── server.ts              # Express Server Entrypoint
+│   └── package.json
+│
+└── ml/                            # Python Machine Learning Microservice (Port 8000)
+    ├── data/
+    │   ├── raw/                   # Indian CPCB & OpenAQ Raw Datasets (`india_cpcb_openaq_public.csv`)
+    │   └── processed/             # Cleaned & Feature Engineered CSVs (`historical_aqi_processed.csv`)
+    ├── notebooks/
+    │   ├── AQI_Forecasting.ipynb  # Executed Multi-Horizon Forecasting Notebook
+    │   ├── Hotspot_Detection.ipynb # Executed Geospatial Clustering Notebook
+    │   ├── Pollution_Source_Attribution.ipynb # Executed Source Classifier Notebook
+    │   └── Health_Impact_Prediction.ipynb   # Executed Health Risk Notebook
+    ├── models/
+    │   ├── best_aqi_model.pkl     # Production Regressor Model
+    │   ├── scaler.pkl             # StandardScaler Artifact
+    │   ├── feature_columns.pkl    # Feature Columns Contract
+    │   ├── hotspot_model.pkl      # K-Means Hotspot Cluster Model
+    │   ├── pollution_source_model.pkl # Source Classifier Model (100% Accuracy)
+    │   └── health_risk_model.pkl  # Health Risk Regressor
     ├── src/
-    │   ├── config/                # MongoDB Atlas Connection & In-Memory Fallback (`db.ts`)
-    │   ├── agents/                # 6 Specialized Agentic AI Engines
-    │   │   ├── aqiForecastAgent.ts          # Predictive neural trajectory modeling
-    │   │   ├── pollutionAttributionAgent.ts # Sectoral chemical speciation breakdown
-    │   │   ├── hotspotDetectionAgent.ts    # Geospatial risk score clustering
-    │   │   ├── enforcementAgent.ts         # Inspector team dispatch strategy
-    │   │   ├── healthAdvisoryAgent.ts      # Demographic medical advice generator
-    │   │   └── smartCityAgent.ts           # Long-term urban planning interventions
-    │   ├── controllers/           # Request Handlers for all 12 API modules
-    │   ├── routes/                # Express Route Bindings (`index.ts`)
-    │   ├── models/                # 11 Mongoose Schemas (User, City, AQIData, Forecast, Hotspot, PollutionSource, SatelliteData, HealthAdvisory, Recommendation, Alert, Enforcement)
-    │   ├── middlewares/           # CORS Configured for http://localhost:3000 & Error Handler
-    │   ├── services/              # Multi-City Seed Service (`seedService.ts`)
-    │   └── server.ts              # Express Server Entrypoint
-    ├── .env                       # PORT=5000, MONGODB_URI, OPENAI_API_KEY, FRONTEND_URL
-    ├── package.json
-    └── tsconfig.json
+    │   ├── data_pipeline.py       # Public Dataset Fetcher & Preprocessing Engine
+    │   ├── train_aqi_forecast.py  # Model Trainer & Comparison Engine (MAE, RMSE, R², MAPE)
+    │   ├── train_hotspots.py      # Spatial Hotspot Cluster Trainer
+    │   ├── train_attribution.py   # Multi-Class Speciation Trainer
+    │   ├── train_health_impact.py # Health Risk Trainer
+    │   └── predict_engine.py      # Unified Inference Engine
+    ├── api/
+    │   └── main.py                # FastAPI REST Microservice (`http://localhost:8000`)
+    ├── reports/                   # Model Metrics JSON Reports & Visual PNG Charts
+    ├── requirements.txt
+    └── README.md
 ```
 
 ---
@@ -90,210 +113,94 @@ ET Hackathon/ (Workspace Root)
 
 ### Frontend Stack
 - **Core Framework**: Next.js 15 (App Router) & TypeScript
-- **Styling**: Tailwind CSS & Vanilla CSS Design System Tokens (Dark Mode Glassmorphism)
-- **UI Components**: ShadCN UI / Radix primitives + Lucide Icons
-- **Animation**: Framer Motion micro-interactions
-- **Data Visualization**: Recharts (diurnal cycles, trend curves, pie charts, bar charts)
+- **Styling**: Tailwind CSS & Light-Theme Apple/Linear Design System Palette (`#2563EB`, `#06B6D4`, `#10B981`, `#F8FAFC`)
+- **Icons & Micro-Animations**: Lucide Icons & Framer Motion
+- **Data Visualization**: Recharts (diurnal cycles, radar charts, trend curves, bar charts)
 - **Networking**: Axios (centralized service layer `src/services/api.ts`)
-- **State & Data Caching**: React Query (`@tanstack/react-query`)
 - **Geospatial Mapping**: Leaflet & React Leaflet (layer overlays, station popups, coordinate pins)
-- **3D Graphics & Simulation**: Three.js & `@react-three/fiber` (3D Atmospheric Earth & 3D Smart City Digital Twin)
+- **3D Graphics & Simulation**: Three.js & `@react-three/fiber` (3D Isometric Floating Pins & 3D Smart City Digital Twin)
 
 ### Backend Stack
 - **Runtime Environment**: Node.js & Express.js with TypeScript
-- **Database**: MongoDB Atlas via Mongoose ODM
-- **AI Agentic Layer**: OpenAI GPT Models / LangChain Agent Workflows with an intelligent fallback heuristic engine
-- **Security & CORS**: Express CORS configured allowing `http://localhost:3000`
+- **Database**: MongoDB Atlas via Mongoose ODM (with automated in-memory fallback)
+- **ML Proxy Layer**: `axios` bridge to Python FastAPI ML service
+
+### Machine Learning Stack
+- **Python Runtime**: Python 3.13 / Virtualenv
+- **ML Frameworks**: Scikit-Learn, XGBoost, LightGBM, CatBoost
+- **Data Processing**: Pandas, NumPy, Joblib
+- **REST Microservice**: FastAPI, Uvicorn (Port 8000)
+- **Notebooks & Reports**: Jupyter Notebook, Matplotlib, Seaborn
 
 ---
 
-## 🛰 The 13 Core Modules
-
-### 1. 🏠 Smart Dashboard (`DashboardView.tsx`)
-- **Key Indicators**: Current AQI (178), Predicted AQI (205), Active Alerts (3), High Risk Zones (8), Affected Citizens (2.4M), Inspection Required Areas (5), Air Quality Score (42/100), City Health Index (68%).
-- **Interactive Trajectory**: Recharts 24-hour, 7-day, and 30-day AQI trend curves.
-- **Sectoral Pie Chart**: Source attribution breakdown (Traffic 52%, Construction 22%, Industry 15%, Waste Burning 6%, Domestic 5%).
-- **AI Summary Card**: Executive narrative explaining atmospheric boundary inversion and traffic NO2 buildup.
-
-### 2. 🌎 Air Quality Intelligence Map (`IntelligenceMapView.tsx`)
-- Full-screen GIS mapping canvas powered by Leaflet.
-- **Togglable GIS Layers**:
-  - 🔥 AQI Heatmap Plumes
-  - 📡 Ground CEMS Monitoring Stations
-  - 🚗 Real-time Traffic Corridors
-  - 💥 Hotspot Risk Clusters
-  - 🛰 Sentinel-5P Satellite NO2 Overlay
-- **Interactive Station Popups**: Live telemetry showing PM2.5, PM10, Temperature, Humidity, and Operational Status.
-
-### 3. 📈 AQI Forecasting Engine (`ForecastView.tsx`)
-- **Predictive Horizons**: 24-Hour, 48-Hour, 72-Hour, and 7-Day predictions.
-- **Confidence Metrics**: Neural model accuracy score (94.2%).
-- **AI Explanation Banner**: Explains weather fronts, wind velocity changes, and stubble burning plume arrival times.
-
-### 4. 🏭 Pollution Source Attribution (`AttributionView.tsx`)
-- Identifies root causes of pollution:
-  - **Traffic Emissions (52%)**: NO2 & PM2.5 (High Risk)
-  - **Construction Dust (22%)**: PM10 Fugitive Dust (High Risk)
-  - **Industrial Plumes (15%)**: SO2 & Chemical Smog (Medium Risk)
-  - **Waste Burning (6%)**: Dioxins & PM2.5 (Medium Risk)
-  - **Domestic Sources (5%)**: CO & VOCs (Low Risk)
-- Actionable mitigation recommendations per sector.
-
-### 5. 🔥 Pollution Hotspot Detection (`HotspotView.tsx`)
-- Vector hotspot map showcasing critical sectors.
-- **Inspection Directory Table**: Zone Name, AQI Level, Risk Score (0-100), Priority Level (Critical/High/Medium), and AI Recommended Inspection Directives (e.g., MP Nagar Sector 2, AQI 285, Risk Score 94).
-
-### 6. 🚨 Enforcement Intelligence (`EnforcementView.tsx`)
-- AI dispatch engine guiding enforcement teams:
-  - Deploy inspection teams to Industrial Area Zone 3 (auditing stack CEMS).
-  - Issue construction halt directives in East Sector.
-  - Ban heavy BS-III commercial vehicles during peak morning hours.
-
-### 7. 🛰 Satellite Intelligence (`SatelliteView.tsx`)
-- Integrates ESA Sentinel-5P TROPOMI & NASA MODIS orbital telemetry:
-  - NO2 Column Density (0.00018 mol/m²)
-  - SO2 Column Density (0.00004 mol/m²)
-  - CO Column Density (0.024 mol/m²)
-  - UV Aerosol Index (AI: 2.4)
-  - Urban Heat Island (UHI) LST Anomaly (+4.2°C)
-
-### 8. 🤖 AI Copilot (`CopilotView.tsx` & Drawer)
-- Interactive conversational interface backed by REST API `POST /api/copilot`.
-- Supports prompt shortcuts ("Generate enforcement plan", "Which area needs inspection?", "Predict AQI tomorrow").
-
-### 9. 🏥 Citizen Health Advisory (`HealthAdvisoryView.tsx`)
-- Medical guidance tailored for 6 target demographics:
-  - **Children**: Cancel outdoor sports & assemblies; run HEPA air purifiers.
-  - **Senior Citizens**: Avoid outdoor exposure; wear N95 respirators.
-  - **Asthma Patients**: Emergency advisory; avoid exposure between 06:00-10:00.
-  - **Pregnant Women**: High risk advisory; protect fetal cardiovascular health.
-  - **Outdoor Workers**: Mandate 15-minute hourly rest breaks in filtered shelters.
-  - **General Citizens**: Moderate risk guidance; limit strenuous outdoor cardio.
-
-### 10. 🏙 Multi-City Intelligence (`MultiCityView.tsx`)
-- Comparative benchmark across 9 Indian and global hubs:
-  - **Delhi** (AQI 285), **Mumbai** (AQI 142), **Bhopal** (AQI 178), **Indore** (AQI 115), **Pune** (AQI 98), **Hyderabad** (AQI 132), **Bengaluru** (AQI 68), **Chennai** (AQI 82), **Kolkata** (AQI 210).
-
-### 11. 🌳 Smart City Recommendations (`RecommendationsView.tsx`)
-- Proactive structural policy interventions:
-  - Short-Term: Dynamic green-wave traffic signal calibration.
-  - Medium-Term: Miyawaki urban forest plantation micro-pockets.
-  - Long-Term: Mandatory EV commercial freight transit zones.
-
-### 12. 🏙️ 3D Smart City Digital Twin (`DigitalTwin3D.tsx` - WOW Factor)
-- **Three.js & React Three Fiber** 3D urban microclimate simulation:
-  - 3D Buildings, roads, industrial stacks, trees, and moving vehicles.
-  - **Animated Pollution Clouds**: Dynamic opacity & floating particles over industrial stacks.
-  - **Color-Coded Risk Zones**: Green (Good), Yellow (Moderate), Red (Unhealthy), Purple (Hazardous).
-  - **Interactive Zone Clicks**: Selecting a building or zone displays live AQI metrics, primary cause, and inspection priority.
-
-### 13. 📊 Analytics (`AnalyticsView.tsx`)
-- Recharts municipal ward ranking graphs.
-- Severity directory ranking top polluted vs cleanest municipal wards.
-
----
-
-## 🤖 The 6 Backend AI Agents
-
-| Agent Name | File Path | Core Function | REST Endpoint |
-| :--- | :--- | :--- | :--- |
-| **AQI Forecast Agent** | `backend/src/agents/aqiForecastAgent.ts` | Multi-horizon neural predictive modeling | `GET /api/forecast` |
-| **Pollution Attribution Agent** | `backend/src/agents/pollutionAttributionAgent.ts` | Sectoral root-cause chemical breakdown | `GET /api/pollution-sources` |
-| **Hotspot Detection Agent** | `backend/src/agents/hotspotDetectionAgent.ts` | Geospatial risk score clustering | `GET /api/hotspots` |
-| **Enforcement Agent** | `backend/src/agents/enforcementAgent.ts` | Inspection team dispatch planning | `GET /api/enforcement` |
-| **Health Advisory Agent** | `backend/src/agents/healthAdvisoryAgent.ts` | Demographic medical advice generation | `GET /api/advisories` |
-| **Smart City Agent** | `backend/src/agents/smartCityAgent.ts` | Structural urban planning interventions | `GET /api/recommendations` |
-
----
-
-## 🗄 MongoDB Atlas Collections (11 Collections)
-
-1. `users`: Persona accounts and admin preferences.
-2. `cities`: Geospatial coordinates, population, and baseline AQI metrics.
-3. `aqi_data`: Live CEMS ground sensor telemetry (PM2.5, PM10, NO2, SO2, CO, O3, Temp, Humidity, Wind).
-4. `forecasts`: Multi-day predicted AQI trajectories and confidence scores.
-5. `hotspots`: Geospatial pollution risk clusters and intensity levels.
-6. `pollution_sources`: Sectoral contribution percentages and primary pollutants.
-7. `satellite_data`: Sentinel-5P column density telemetry and aerosol indices.
-8. `health_advisories`: Demographic medical exposure protocols.
-9. `recommendations`: Urban planning policy interventions.
-10. `alerts`: Active emergency warnings and region notifications.
-11. `enforcement_intelligence`: Patrol team dispatches and construction halt orders.
-
----
-
-## 🔌 REST API Endpoints Reference
+## 🔌 REST API Reference
 
 ```text
+# Node.js Backend API (Port 5000)
 GET  /api/dashboard          -> Unified overview metrics (currentAQI, predictedAQI, hotspots, alerts)
-GET  /api/aqi                -> Live and historical AQI ground telemetry
-GET  /api/forecast           -> 7-day predictive AI forecast model data
-GET  /api/hotspots           -> Geospatial pollution hotspots from MongoDB
+GET  /api/forecast           -> 24h, 48h, 72h, 7D predictive AI forecast model data
 GET  /api/pollution-sources  -> Sectoral pollution attribution percentages
-GET  /api/satellite          -> Sentinel-5P & MODIS satellite column densities
-POST /api/copilot            -> Interactive AI Copilot environmental analysis
-GET  /api/advisories         -> Demographic health guidance & N95 alerts
-GET  /api/recommendations    -> Urban policy intervention strategies
-GET  /api/analytics          -> Ward rankings & 24h diurnal gas breakdown
-GET  /api/cities             -> Multi-city comparative metrics (9 cities)
-GET  /api/enforcement        -> Inspection team dispatch strategies
-POST /api/seed               -> Database reset & seeder endpoint
+GET  /api/hotspots           -> Geospatial pollution hotspots
+POST /api/usp/simulate       -> AI Intervention Simulator formula & prediction calculation
+GET  /api/usp/scores         -> Municipal Environmental Intelligence Scores (0-100)
+GET  /api/usp/complaints     -> Citizen Complaints + AI Verification feed
+GET  /api/usp/risk-radar     -> 24h/48h/72h Multi-factor Risk Radar metrics
+GET  /api/usp/story-report   -> Automated AI Environmental Report synthesis
+
+# Python ML Microservice API (Port 8000)
+GET  /health                 -> Health check (status: ok)
+POST /predict/aqi            -> Multi-horizon AQI forecast inference
+POST /predict/attribution    -> Pollution source classification inference
+POST /predict/health         -> Health risk & hospital load inference
+POST /predict/score          -> Environmental Intelligence Score inference
 ```
-
----
-
-## 🔑 Demo Persona Roles (`AuthModal.tsx`)
-
-1. **Administrator**: Full command rights, emergency advisory triggers, system seeder access.
-2. **Pollution Control Officer**: Focused on hotspot inspection dispatch, CEMS audits, construction halts.
-3. **City Planner**: Focused on 3D Digital Twin simulation, Miyawaki forests, and EV freight zones.
 
 ---
 
 ## 🚀 Setup & Execution Commands
 
-### Prerequisites
-- Node.js >= 18.x
-- npm >= 9.x
-- MongoDB Atlas (Optional: Backend includes an automated seed dataset fallback if unconfigured)
-
-### Installation
+### 1. Python Machine Learning Service Setup (Port 8000)
 ```bash
-# Install root dependencies
-npm install
+cd ml
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
-# Install backend dependencies
-cd backend && npm install
+# Download Public Dataset & Train All Models
+python3 src/data_pipeline.py
+python3 src/train_aqi_forecast.py
+python3 src/train_hotspots.py
+python3 src/train_attribution.py
+python3 src/train_health_impact.py
 
-# Install frontend dependencies
-cd ../frontend && npm install
+# Execute All Jupyter Notebooks
+venv/bin/jupyter nbconvert --to notebook --execute notebooks/AQI_Forecasting.ipynb --inplace
+venv/bin/jupyter nbconvert --to notebook --execute notebooks/Hotspot_Detection.ipynb --inplace
+venv/bin/jupyter nbconvert --to notebook --execute notebooks/Pollution_Source_Attribution.ipynb --inplace
+venv/bin/jupyter nbconvert --to notebook --execute notebooks/Health_Impact_Prediction.ipynb --inplace
+
+# Start Python FastAPI Microservice
+python3 api/main.py
 ```
 
-### Running Concurrently (Recommended)
-From the root workspace directory:
-```bash
-npm run dev
-```
-
-### Running Separately
-
-**Backend Server (Port 5000):**
+### 2. Node.js Backend Server Setup (Port 5000)
 ```bash
 cd backend
+npm install
 npm run dev
 ```
-Accessible at: `http://localhost:5000/api`
 
-**Frontend Application (Port 3000):**
+### 3. Next.js Frontend Setup (Port 3000)
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
-Accessible at: `http://localhost:3000`
 
 ---
 
 ## ✅ Build Verification Summary
-- **Backend Build (`tsc`)**: Passed cleanly with `0` errors.
-- **Frontend Build (`next build`)**: Passed cleanly with `4/4` static pages generated.
-- **GitHub Repository**: Pushed to `https://github.com/sumitkumar7766/AirPulse-AI.git`.
+- **Python ML Service**: 4 models trained on CPCB/OpenAQ public dataset, 4 notebooks executed cleanly (`100% Success`), running on **Port 8000**.
+- **Node.js Backend**: `tsc` compiled cleanly with `0` errors, running on **Port 5000**.
+- **Next.js Frontend**: `next build` passed cleanly with `28/28` static pages generated, running on **Port 3000**.
