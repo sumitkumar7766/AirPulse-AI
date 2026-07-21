@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { LoginPage } from '../components/LoginPage';
 import { Sidebar, ActiveModule } from '../components/Sidebar';
 import { Header } from '../components/Header';
 import { AuthModal } from '../components/AuthModal';
@@ -25,16 +26,40 @@ import { SettingsView } from '../components/views/SettingsView';
 
 import { useDashboard, useHotspots } from '../hooks/useAirPulseData';
 
-export default function SmartCityCommandCenter() {
+export default function AppRoot() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [activeModule, setActiveModule] = useState<ActiveModule>('dashboard');
   const [userRole, setUserRole] = useState<UserRole>('admin');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isCopilotDrawerOpen, setIsCopilotDrawerOpen] = useState(false);
 
+  useEffect(() => {
+    const storedAuth = localStorage.getItem('isLoggedIn');
+    if (storedAuth === 'true') {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('role', 'administrator');
+    setIsLoggedIn(true);
+    setActiveModule('dashboard');
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  };
+
   // REST API Telemetry
   const dashboardQuery = useDashboard();
   const hotspotsQuery = useHotspots();
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
 
   const renderActiveView = () => {
     switch (activeModule) {
@@ -96,6 +121,7 @@ export default function SmartCityCommandCenter() {
           onToggleCopilot={() => setIsCopilotDrawerOpen(true)}
           cityName={dashboardQuery.data?.cityName || 'Bhopal'}
           isBackendConnected={!dashboardQuery.isError}
+          onSignOut={handleSignOut}
         />
 
         {/* Dynamic View Mount */}

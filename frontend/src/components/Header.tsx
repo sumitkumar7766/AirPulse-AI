@@ -7,12 +7,14 @@ interface HeaderProps {
   onToggleCopilot: () => void;
   cityName?: string;
   isBackendConnected?: boolean;
+  onSignOut?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onToggleCopilot,
   cityName = 'New Delhi',
-  isBackendConnected = true
+  isBackendConnected = true,
+  onSignOut
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-background/80 border-b border-surfaceLight/50 shadow-2xl">
@@ -65,6 +67,15 @@ export const Header: React.FC<HeaderProps> = ({
             <Bot className="w-4 h-4 animate-bounce" />
             <span>AI Copilot</span>
           </button>
+          {onSignOut && (
+            <button
+              onClick={onSignOut}
+              className="px-3 py-2.5 rounded-xl bg-surfaceLight/80 hover:bg-rose-600/20 text-gray-300 hover:text-rose-400 font-medium text-xs border border-surfaceLight transition-all"
+              title="Exit Demo to Login Page"
+            >
+              Exit Demo
+            </button>
+          )}
         </div>
 
       </div>
