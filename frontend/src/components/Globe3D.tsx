@@ -79,9 +79,10 @@ export const Globe3D: React.FC<Globe3DProps> = ({ hotspots = [] }) => {
       const z = (globeRadius + 2) * Math.sin(phi) * Math.sin(theta);
       const y = (globeRadius + 2) * Math.cos(phi);
 
+      const aqiVal = point.aqiValue ?? (point as any).aqi ?? 200;
       const markerGeom = new THREE.SphereGeometry(2.5, 16, 16);
       const markerMat = new THREE.MeshBasicMaterial({
-        color: point.aqiValue > 250 ? 0xef4444 : 0xf59e0b,
+        color: aqiVal > 250 ? 0xef4444 : 0xf59e0b,
       });
       const marker = new THREE.Mesh(markerGeom, markerMat);
       marker.position.set(x, y, z);

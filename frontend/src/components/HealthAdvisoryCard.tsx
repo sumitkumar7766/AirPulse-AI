@@ -64,7 +64,7 @@ export const HealthAdvisoryCard: React.FC<HealthAdvisoryCardProps> = ({ advisori
                 </span>
               </div>
               <ul className="space-y-2">
-                {item.recommendations.map((rec, rIdx) => (
+                {(item.recommendations || []).map((rec, rIdx) => (
                   <li key={rIdx} className="text-xs text-gray-300 flex items-start gap-2">
                     <AlertCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                     <span>{rec}</span>
