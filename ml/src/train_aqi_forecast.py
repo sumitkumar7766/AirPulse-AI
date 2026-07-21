@@ -12,12 +12,14 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # Try importing XGBoost & LightGBM with graceful fallback
 try:
+    # pyrefly: ignore [missing-import]
     from xgboost import XGBRegressor
     HAS_XGBOOST = True
 except (ImportError, Exception):
     HAS_XGBOOST = False
 
 try:
+    # pyrefly: ignore [missing-import]
     from lightgbm import LGBMRegressor
     HAS_LIGHTGBM = True
 except (ImportError, Exception):
