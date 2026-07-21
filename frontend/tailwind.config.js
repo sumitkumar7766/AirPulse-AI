@@ -10,23 +10,27 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#090d16',
-        surface: '#111827',
-        surfaceLight: '#1f293d',
+        background: '#F8FAFC',
+        surface: '#FFFFFF',
+        surfaceLight: '#F1F5F9',
+        borderLight: '#E2E8F0',
+        textPrimary: '#0F172A',
+        textSecondary: '#475569',
         accent: {
-          cyan: '#06b6d4',
-          emerald: '#10b981',
-          amber: '#f59e0b',
-          rose: '#f43f5e',
-          purple: '#a855f7'
+          blue: '#2563EB',
+          cyan: '#06B6D4',
+          emerald: '#10B981',
+          amber: '#F59E0B',
+          rose: '#EF4444',
+          purple: '#9333EA'
         },
         aqi: {
-          good: '#10b981',
-          moderate: '#f59e0b',
-          unhealthySensitive: '#f97316',
-          unhealthy: '#ef4444',
-          veryUnhealthy: '#a855f7',
-          hazardous: '#78350f'
+          good: '#10B981',
+          moderate: '#F59E0B',
+          unhealthySensitive: '#F97316',
+          unhealthy: '#EF4444',
+          veryUnhealthy: '#9333EA',
+          hazardous: '#78350F'
         }
       },
       animation: {

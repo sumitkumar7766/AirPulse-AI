@@ -41,11 +41,11 @@ export const CommandCenterShell: React.FC<CommandCenterShellProps> = ({ children
   }
 
   return (
-    <div className="min-h-screen bg-background text-gray-100 flex relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex relative overflow-x-hidden">
       
-      {/* Ambient background lighting */}
-      <div className="fixed top-0 left-1/3 w-[700px] h-[700px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="fixed bottom-0 right-1/4 w-[700px] h-[700px] bg-purple-500/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Ambient background lighting for Light Theme */}
+      <div className="fixed top-0 left-1/3 w-[700px] h-[700px] bg-blue-500/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="fixed bottom-0 right-1/4 w-[700px] h-[700px] bg-emerald-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Sidebar Navigation */}
       <Sidebar
@@ -72,15 +72,15 @@ export const CommandCenterShell: React.FC<CommandCenterShellProps> = ({ children
         </main>
 
         {/* Footer */}
-        <footer className="w-full border-t border-surfaceLight/60 bg-surface/40 py-6 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
-            <p>© 2026 AirPulse AI. Enterprise Smart City Command Center. Palantir Gotham Architecture.</p>
-            <div className="flex items-center gap-3 font-mono text-[11px]">
-              <span className="text-cyan-400">Frontend: Port 3000</span>
+        <footer className="w-full border-t border-slate-200 bg-white/60 py-6 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <p>© 2026 AirPulse AI. Enterprise Smart City Command Center. Light Theme Architecture.</p>
+            <div className="flex items-center gap-3 font-mono text-[11px] font-semibold">
+              <span className="text-blue-600">Frontend: Port 3000</span>
               <span>•</span>
-              <span className="text-emerald-400">Backend: Port 5000</span>
+              <span className="text-emerald-600">Backend: Port 5000</span>
               <span>•</span>
-              <span className="text-purple-400">MongoDB Atlas Telemetry</span>
+              <span className="text-purple-600">MongoDB Atlas Telemetry</span>
             </div>
           </div>
         </footer>

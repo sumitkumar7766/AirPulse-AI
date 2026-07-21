@@ -21,21 +21,21 @@ export const HotspotMap: React.FC<HotspotMapProps> = ({ hotspots = [] }) => {
   const active = selectedHotspot || displayHotspots[0];
 
   return (
-    <div className="w-full rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl shadow-2xl p-6 flex flex-col justify-between">
+    <div className="w-full rounded-2xl bg-white border border-slate-200 shadow-md p-6 flex flex-col justify-between">
       
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+          <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-200">
             <Flame className="w-5 h-5 animate-pulse" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white">Geospatial Hotspot Vector Map</h3>
-            <p className="text-xs text-gray-400">Live MongoDB Coordinate Feed & Radius Impact</p>
+            <h3 className="text-lg font-bold text-slate-900">Geospatial Hotspot Vector Map</h3>
+            <p className="text-xs text-slate-500 font-medium">Live MongoDB Coordinate Feed & Radius Impact</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-amber-950 text-amber-400 border border-amber-800/60">
+          <span className="px-3 py-1 text-xs font-bold rounded-full bg-amber-50 text-amber-700 border border-amber-200">
             {displayHotspots.length} Active Hotspots
           </span>
         </div>
@@ -54,70 +54,70 @@ export const HotspotMap: React.FC<HotspotMapProps> = ({ hotspots = [] }) => {
                 onClick={() => setSelectedHotspot(item)}
                 className={`p-4 rounded-xl border transition-all duration-300 cursor-pointer flex flex-col gap-2 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-amber-500/20 via-surface to-surface border-amber-500/60 shadow-lg shadow-amber-500/10'
-                    : 'bg-surfaceLight/40 border-surfaceLight/80 hover:bg-surfaceLight/80'
+                    ? 'bg-blue-50/80 border-blue-400 shadow-md ring-1 ring-blue-400/50'
+                    : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-cyan-400 flex items-center gap-1">
+                  <span className="text-xs font-mono font-bold text-blue-600 flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5" />
                     {item.cityName}
                   </span>
                   <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${
-                    item.intensity === 'Severe' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
+                    item.intensity === 'Severe' ? 'bg-rose-100 text-rose-700 border border-rose-200' : 'bg-amber-100 text-amber-700 border border-amber-200'
                   }`}>
                     {item.intensity} ({item.aqiValue} AQI)
                   </span>
                 </div>
-                <h4 className="text-sm font-semibold text-white line-clamp-1">{item.title}</h4>
-                <p className="text-xs text-gray-400">{item.primaryCause}</p>
+                <h4 className="text-sm font-bold text-slate-900 line-clamp-1">{item.title}</h4>
+                <p className="text-xs text-slate-500 font-medium">{item.primaryCause}</p>
               </div>
             );
           })}
         </div>
 
         {/* Right: Map Telemetry Showcase Box */}
-        <div className="lg:col-span-2 rounded-xl bg-background/90 border border-surfaceLight p-5 relative overflow-hidden flex flex-col justify-between min-h-[340px]">
+        <div className="lg:col-span-2 rounded-xl bg-slate-50 border border-slate-200 p-5 relative overflow-hidden flex flex-col justify-between min-h-[340px]">
           
           {/* Simulated Map Grid Overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-60" />
+          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] opacity-80" />
 
           {/* Top telemetry bar */}
           <div className="z-10 flex items-center justify-between">
-            <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5 bg-surface/80 px-3 py-1.5 rounded-lg border border-surfaceLight">
-              <Navigation className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-xs font-mono font-bold text-blue-600 flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+              <Navigation className="w-3.5 h-3.5 text-blue-600" />
               LAT: {active.lat.toFixed(4)} | LNG: {active.lng.toFixed(4)}
             </span>
-            <span className="text-xs text-emerald-400 flex items-center gap-1 bg-surface/80 px-3 py-1.5 rounded-lg border border-surfaceLight">
+            <span className="text-xs font-mono font-bold text-emerald-600 flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
               <Layers className="w-3.5 h-3.5" />
               Radius: {active.radiusKm} km Impact Zone
             </span>
           </div>
 
-          {/* Central Animated Radar / Map Marker Focus */}
+          {/* Central Animated Radar Focus */}
           <div className="z-10 my-auto flex flex-col items-center justify-center text-center p-6">
             <div className="relative mb-4">
               <div className="w-20 h-20 rounded-full bg-rose-500/20 animate-ping absolute inset-0" />
-              <div className="w-20 h-20 rounded-full bg-amber-500/20 border-2 border-amber-500 flex items-center justify-center relative shadow-2xl shadow-amber-500/40">
-                <AlertTriangle className="w-8 h-8 text-amber-400 animate-bounce" />
+              <div className="w-20 h-20 rounded-full bg-amber-100 border-2 border-amber-500 flex items-center justify-center relative shadow-xl">
+                <AlertTriangle className="w-8 h-8 text-amber-600 animate-bounce" />
               </div>
             </div>
-            <h3 className="text-xl font-extrabold text-white">{active.title}</h3>
-            <p className="text-sm text-gray-300 max-w-md mt-1">{active.primaryCause}</p>
+            <h3 className="text-xl font-extrabold text-slate-900">{active.title}</h3>
+            <p className="text-sm text-slate-600 font-medium max-w-md mt-1">{active.primaryCause}</p>
             <div className="flex items-center gap-3 mt-4">
-              <div className="px-4 py-1.5 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-400 text-sm font-bold">
+              <div className="px-4 py-1.5 rounded-xl bg-rose-100 border border-rose-300 text-rose-700 text-sm font-extrabold">
                 AQI Peak: {active.aqiValue}
               </div>
-              <div className="px-4 py-1.5 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 text-sm font-bold">
+              <div className="px-4 py-1.5 rounded-xl bg-blue-100 border border-blue-300 text-blue-700 text-sm font-extrabold">
                 Status: {active.activeStatus ? 'ACTIVE MONITORING' : 'RESOLVED'}
               </div>
             </div>
           </div>
 
           {/* Bottom attribution */}
-          <div className="z-10 flex items-center justify-between text-[11px] text-gray-400 pt-2 border-t border-surfaceLight/60">
+          <div className="z-10 flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200 font-medium">
             <span>Tile Source: Esri / Sentinel Pollution Mapping</span>
-            <span>REST API Endpoint: <code className="text-purple-400 font-mono">/api/hotspots</code></span>
+            <span>REST API Endpoint: <code className="text-purple-600 font-mono font-bold">/api/hotspots</code></span>
           </div>
 
         </div>

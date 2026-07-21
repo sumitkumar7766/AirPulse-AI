@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Box, Sparkles, AlertCircle, Info, Activity, Flame, ShieldAlert } from 'lucide-react';
+import { Box, Sparkles } from 'lucide-react';
 
 interface ZoneDetail {
   name: string;
@@ -19,7 +19,7 @@ export const DigitalTwin3D: React.FC = () => {
   const [selectedZone, setSelectedZone] = useState<ZoneDetail | null>(null);
 
   const zones: ZoneDetail[] = [
-    { name: 'Industrial Sector 3 (Furnace Zone)', aqi: 312, category: 'Hazardous (Purple Zone)', color: '#a855f7', primaryCause: 'Coal Power Furnace Stack Plumes', buildingsCount: 14, vehiclesCount: 85 },
+    { name: 'Industrial Sector 3 (Furnace Zone)', aqi: 312, category: 'Hazardous (Purple Zone)', color: '#9333ea', primaryCause: 'Coal Power Furnace Stack Plumes', buildingsCount: 14, vehiclesCount: 85 },
     { name: 'MP Nagar Traffic Corridor', aqi: 285, category: 'Very Unhealthy (Red Zone)', color: '#ef4444', primaryCause: 'Diesel Heavy Freight Gridlock Exhaust', buildingsCount: 28, vehiclesCount: 210 },
     { name: 'East Sector Construction Hub', aqi: 188, category: 'Unhealthy (Yellow Zone)', color: '#f59e0b', primaryCause: 'Unpaved Road Fugitive PM10 Dust', buildingsCount: 18, vehiclesCount: 65 },
     { name: 'Miyawaki Bio-Forest Sanctuary', aqi: 45, category: 'Good (Green Zone)', color: '#10b981', primaryCause: 'Urban Dense Canopy & Zero Emissions', buildingsCount: 4, vehiclesCount: 10 }
@@ -34,9 +34,9 @@ export const DigitalTwin3D: React.FC = () => {
     const width = container.clientWidth;
     const height = container.clientHeight || 500;
 
-    // 1. Scene
+    // 1. Scene with Light Background
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x090d16);
+    scene.background = new THREE.Color(0xf8fafc);
 
     // 2. Camera
     const camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
@@ -50,14 +50,14 @@ export const DigitalTwin3D: React.FC = () => {
     container.appendChild(renderer.domElement);
 
     // 4. Ground Grid & Roads Mesh
-    const gridHelper = new THREE.GridHelper(240, 30, 0x06b6d4, 0x1f293d);
+    const gridHelper = new THREE.GridHelper(240, 30, 0x2563eb, 0xcbd5e1);
     scene.add(gridHelper);
 
     // 5. Buildings Mesh Group (Color Coded Zones)
     const cityGroup = new THREE.Group();
 
     // Zone 1: Industrial (Purple)
-    const buildMat1 = new THREE.MeshPhongMaterial({ color: 0xa855f7, wireframe: false, opacity: 0.9, transparent: true });
+    const buildMat1 = new THREE.MeshPhongMaterial({ color: 0x9333ea, opacity: 0.9, transparent: true });
     for (let i = 0; i < 8; i++) {
       const h = Math.random() * 30 + 20;
       const bGeom = new THREE.BoxGeometry(12, h, 12);
@@ -100,7 +100,7 @@ export const DigitalTwin3D: React.FC = () => {
 
     // 6. Animated Pollution Cloud Particles
     const cloudGeom = new THREE.SphereGeometry(25, 16, 16);
-    const cloudMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, transparent: true, opacity: 0.25 });
+    const cloudMat = new THREE.MeshBasicMaterial({ color: 0x9333ea, transparent: true, opacity: 0.25 });
     const cloud1 = new THREE.Mesh(cloudGeom, cloudMat);
     cloud1.position.set(-45, 40, -45);
     scene.add(cloud1);
@@ -111,10 +111,10 @@ export const DigitalTwin3D: React.FC = () => {
     scene.add(cloud2);
 
     // 7. Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0x06b6d4, 1.5);
+    const dirLight = new THREE.DirectionalLight(0x2563eb, 1.5);
     dirLight.position.set(100, 150, 100);
     scene.add(dirLight);
 
@@ -153,18 +153,18 @@ export const DigitalTwin3D: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900">
       
       {/* Header */}
-      <div className="p-6 rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
-            <Box className="w-5 h-5 text-purple-400 animate-bounce" /> 3D Smart City Digital Twin Command Center
+          <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+            <Box className="w-5 h-5 text-purple-600 animate-bounce" /> 3D Smart City Digital Twin Command Center
           </h2>
-          <p className="text-xs text-gray-400">Three.js Interactive Urban Microclimate & Animated Pollution Vector Simulation</p>
+          <p className="text-xs text-slate-500 font-medium">Three.js Interactive Urban Microclimate & Animated Pollution Vector Simulation</p>
         </div>
-        <span className="px-4 py-2 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 text-xs font-bold flex items-center gap-1.5 animate-pulse">
-          <Sparkles className="w-4 h-4" /> 3D WOW REAL-TIME RENDER ENGINE
+        <span className="px-4 py-2 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold flex items-center gap-1.5 animate-pulse">
+          <Sparkles className="w-4 h-4 text-purple-600" /> 3D WOW REAL-TIME RENDER ENGINE
         </span>
       </div>
 
@@ -172,27 +172,27 @@ export const DigitalTwin3D: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left 2 Cols: Three.js Canvas Container */}
-        <div className="lg:col-span-2 min-h-[480px] rounded-2xl bg-background/90 border border-surfaceLight relative overflow-hidden flex flex-col justify-between p-6 shadow-2xl">
+        <div className="lg:col-span-2 min-h-[480px] rounded-2xl bg-slate-100 border border-slate-200 relative overflow-hidden flex flex-col justify-between p-6 shadow-md">
           <div ref={mountRef} className="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing" />
           
           <div className="z-10 flex items-center justify-between pointer-events-none">
-            <span className="px-3 py-1.5 rounded-xl bg-surface/80 border border-surfaceLight text-xs font-mono text-cyan-400">
+            <span className="px-3 py-1.5 rounded-xl bg-white/90 border border-slate-200 text-xs font-mono font-bold text-blue-600 shadow-sm">
               Rotational Orbit: 0.002 rad/s
             </span>
-            <span className="px-3 py-1.5 rounded-xl bg-surface/80 border border-surfaceLight text-xs font-mono text-purple-400">
+            <span className="px-3 py-1.5 rounded-xl bg-white/90 border border-slate-200 text-xs font-mono font-bold text-purple-600 shadow-sm">
               Live Animated Plumes Active
             </span>
           </div>
 
-          <div className="z-10 flex items-center justify-between text-xs text-gray-300 pointer-events-none pt-2 border-t border-surfaceLight/40">
+          <div className="z-10 flex items-center justify-between text-xs font-semibold text-slate-600 pointer-events-none pt-2 border-t border-slate-300/60">
             <span>Color-Coded Zones: Green (Good) | Yellow (Moderate) | Red (Unhealthy) | Purple (Hazardous)</span>
           </div>
         </div>
 
         {/* Right 1 Col: Zone Click Details Card */}
-        <div className="lg:col-span-1 rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl p-6 shadow-2xl space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-1 rounded-2xl bg-white border border-slate-200 p-6 shadow-md space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-white mb-3">Interactive Digital Twin Zones</h3>
+            <h3 className="text-base font-bold text-slate-900 mb-3">Interactive Digital Twin Zones</h3>
             
             <div className="space-y-2.5">
               {zones.map((z, idx) => {
@@ -203,30 +203,30 @@ export const DigitalTwin3D: React.FC = () => {
                     onClick={() => setSelectedZone(z)}
                     className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex flex-col gap-1.5 ${
                       isSelected
-                        ? 'bg-surfaceLight/80 border-cyan-400 shadow-lg shadow-cyan-500/20'
-                        : 'bg-background/80 border-surfaceLight hover:bg-surfaceLight/40'
+                        ? 'bg-blue-50/80 border-blue-400 shadow-sm ring-1 ring-blue-400/50'
+                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
                     }`}
                   >
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-white line-clamp-1">{z.name}</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold text-white" style={{ backgroundColor: z.color }}>
+                    <div className="flex items-center justify-between text-xs font-bold">
+                      <span className="text-slate-900 line-clamp-1">{z.name}</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] text-white" style={{ backgroundColor: z.color }}>
                         {z.aqi} AQI
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-400">{z.primaryCause}</p>
+                    <p className="text-[11px] text-slate-500 font-medium">{z.primaryCause}</p>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-background/90 border border-surfaceLight space-y-2">
-            <span className="text-xs font-mono text-cyan-400 font-bold uppercase">Active Zone Telemetry</span>
-            <h4 className="text-sm font-bold text-white">{active.name}</h4>
-            <p className="text-xs text-gray-300">{active.category}</p>
-            <div className="grid grid-cols-2 gap-2 text-xs pt-2 font-mono">
-              <span className="text-gray-400">Structures: <strong className="text-white">{active.buildingsCount}</strong></span>
-              <span className="text-gray-400">Transit: <strong className="text-white">{active.vehiclesCount}</strong></span>
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <span className="text-xs font-mono text-blue-600 font-bold uppercase">Active Zone Telemetry</span>
+            <h4 className="text-sm font-bold text-slate-900">{active.name}</h4>
+            <p className="text-xs text-slate-600 font-medium">{active.category}</p>
+            <div className="grid grid-cols-2 gap-2 text-xs pt-2 font-mono font-bold">
+              <span className="text-slate-500">Structures: <strong className="text-slate-900">{active.buildingsCount}</strong></span>
+              <span className="text-slate-500">Transit: <strong className="text-slate-900">{active.vehiclesCount}</strong></span>
             </div>
           </div>
         </div>

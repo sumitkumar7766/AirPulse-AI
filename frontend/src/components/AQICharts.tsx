@@ -46,38 +46,38 @@ export const AQICharts: React.FC<AQIChartsProps> = ({ forecasts = [], historical
   ];
 
   return (
-    <div className="w-full rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl shadow-2xl p-6 my-6">
+    <div className="w-full rounded-2xl bg-white border border-slate-200 shadow-md p-6 my-6">
       
       {/* Header & Tabs */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+          <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 border border-purple-200">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white">Predictive Trajectory & Telemetry Analytics</h3>
-            <p className="text-xs text-gray-400">AI ML Predictive Models & Diurnal Telemetry</p>
+            <h3 className="text-lg font-bold text-slate-900">Predictive Trajectory & Telemetry Analytics</h3>
+            <p className="text-xs text-slate-500 font-medium">AI ML Predictive Models & Diurnal Telemetry</p>
           </div>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex items-center gap-1 p-1 bg-surfaceLight/60 rounded-xl border border-surfaceLight">
+        <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
           <button
             onClick={() => setActiveTab('forecast')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'forecast'
-                ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'text-gray-400 hover:text-white'
+                ? 'bg-purple-600 text-white shadow-md'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <BarChart2 className="w-3.5 h-3.5" /> 7-Day Forecast
           </button>
           <button
             onClick={() => setActiveTab('24h')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
               activeTab === '24h'
-                ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30'
-                : 'text-gray-400 hover:text-white'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Clock className="w-3.5 h-3.5" /> 24-Hour Cycle
@@ -92,28 +92,28 @@ export const AQICharts: React.FC<AQIChartsProps> = ({ forecasts = [], historical
             <AreaChart data={defaultForecasts} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorPredicted" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#a855f7" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#9333ea" stopOpacity={0.7} />
+                  <stop offset="95%" stopColor="#9333ea" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" />
-              <XAxis dataKey="date" stroke="#94a3b8" tick={{ fontSize: 12 }} />
-              <YAxis stroke="#94a3b8" tick={{ fontSize: 12 }} domain={[0, 'dataMax + 40']} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="date" stroke="#64748b" tick={{ fontSize: 12, fontWeight: 600 }} />
+              <YAxis stroke="#64748b" tick={{ fontSize: 12, fontWeight: 600 }} domain={[0, 'dataMax + 40']} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#111827', borderColor: '#1f293d', borderRadius: '12px', color: '#fff' }}
+                contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#E2E8F0', borderRadius: '12px', color: '#0F172A', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
               />
-              <Area type="monotone" dataKey="predictedAQI" name="Predicted AQI" stroke="#a855f7" strokeWidth={3} fillOpacity={1} fill="url(#colorPredicted)" />
+              <Area type="monotone" dataKey="predictedAQI" name="Predicted AQI" stroke="#9333ea" strokeWidth={3} fillOpacity={1} fill="url(#colorPredicted)" />
             </AreaChart>
           ) : (
             <BarChart data={default24h} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" />
-              <XAxis dataKey="time" stroke="#94a3b8" tick={{ fontSize: 12 }} />
-              <YAxis stroke="#94a3b8" tick={{ fontSize: 12 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="time" stroke="#64748b" tick={{ fontSize: 12, fontWeight: 600 }} />
+              <YAxis stroke="#64748b" tick={{ fontSize: 12, fontWeight: 600 }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#111827', borderColor: '#1f293d', borderRadius: '12px', color: '#fff' }}
+                contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#E2E8F0', borderRadius: '12px', color: '#0F172A', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
               />
               <Legend wrapperStyle={{ paddingTop: '10px' }} />
-              <Bar dataKey="pm25" name="PM2.5 (µg/m³)" fill="#f43f5e" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="pm25" name="PM2.5 (µg/m³)" fill="#ef4444" radius={[4, 4, 0, 0]} />
               <Bar dataKey="pm10" name="PM10 (µg/m³)" fill="#f59e0b" radius={[4, 4, 0, 0]} />
               <Bar dataKey="no2" name="NO2 (ppb)" fill="#06b6d4" radius={[4, 4, 0, 0]} />
             </BarChart>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Wind, Bot, ShieldAlert, Activity, RefreshCw } from 'lucide-react';
+import { Wind, Bot, Activity } from 'lucide-react';
 
 interface HeaderProps {
   onToggleCopilot: () => void;
@@ -17,42 +17,42 @@ export const Header: React.FC<HeaderProps> = ({
   onSignOut
 }) => {
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-background/80 border-b border-surfaceLight/50 shadow-2xl">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 border-b border-slate-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">
-          <div className="relative p-2.5 rounded-2xl bg-gradient-to-br from-cyan-500/20 via-emerald-500/20 to-purple-500/20 border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
-            <Wind className="w-7 h-7 text-cyan-400 animate-pulse" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
+          <div className="relative p-2.5 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/20">
+            <Wind className="w-6 h-6 animate-pulse" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-ping" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
-                AirPulse AI
+              <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                AirPulse<span className="text-blue-600">.AI</span>
               </h1>
-              <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800/60">
-                PRO MONOREPO
+              <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                SMART CITY COMMAND
               </span>
             </div>
-            <p className="text-xs text-gray-400 flex items-center gap-1.5 mt-0.5">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Environmental Intelligence Platform
+            <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5 font-medium">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Environmental Decision Intelligence
             </p>
           </div>
         </div>
 
         {/* Center - Location & Telemetry Badge */}
-        <div className="hidden md:flex items-center gap-4 px-4 py-2 rounded-2xl bg-surface/60 border border-surfaceLight">
+        <div className="hidden md:flex items-center gap-4 px-4 py-2 rounded-2xl bg-slate-100/80 border border-slate-200 shadow-inner">
           <div className="flex items-center gap-2">
-            <Activity className="w-4 h-4 text-emerald-400" />
-            <span className="text-sm font-medium text-gray-200">Active Sensor:</span>
-            <span className="text-sm font-semibold text-cyan-400">{cityName}</span>
+            <Activity className="w-4 h-4 text-emerald-600" />
+            <span className="text-xs font-semibold text-slate-500">Active Sensor:</span>
+            <span className="text-xs font-bold text-blue-600">{cityName}</span>
           </div>
-          <div className="h-4 w-px bg-surfaceLight" />
+          <div className="h-4 w-px bg-slate-300" />
           <div className="flex items-center gap-2">
-            <div className={`w-2.5 h-2.5 rounded-full ${isBackendConnected ? 'bg-emerald-400 shadow-emerald-500/50 shadow-sm' : 'bg-rose-500'}`} />
-            <span className="text-xs font-mono text-gray-400">
+            <div className={`w-2.5 h-2.5 rounded-full ${isBackendConnected ? 'bg-emerald-500 shadow-emerald-500/50 shadow-sm' : 'bg-rose-500'}`} />
+            <span className="text-[11px] font-mono font-bold text-slate-600">
               {isBackendConnected ? 'REST API CONNECTED' : 'OFFLINE MODE'}
             </span>
           </div>
@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleCopilot}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-cyan-600 to-emerald-600 hover:from-purple-500 hover:to-emerald-500 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-purple-500/25 border border-purple-400/30 hover:scale-105 active:scale-95"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition-all hover:scale-105 active:scale-95"
           >
             <Bot className="w-4 h-4 animate-bounce" />
             <span>AI Copilot</span>
@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
           {onSignOut && (
             <button
               onClick={onSignOut}
-              className="px-3 py-2.5 rounded-xl bg-surfaceLight/80 hover:bg-rose-600/20 text-gray-300 hover:text-rose-400 font-medium text-xs border border-surfaceLight transition-all"
+              className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 font-bold text-xs border border-slate-200 transition-all"
               title="Exit Demo to Login Page"
             >
               Exit Demo

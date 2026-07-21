@@ -64,33 +64,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`fixed top-0 left-0 bottom-0 z-40 bg-surface/95 border-r border-surfaceLight/80 backdrop-blur-2xl transition-all duration-300 flex flex-col justify-between shadow-2xl ${
+      className={`fixed top-0 left-0 bottom-0 z-40 bg-white/95 border-r border-slate-200 backdrop-blur-2xl transition-all duration-300 flex flex-col justify-between shadow-xl ${
         isCollapsed ? 'w-20' : 'w-72'
       }`}
     >
       {/* Brand Header */}
-      <div className="p-5 border-b border-surfaceLight/60 flex items-center justify-between">
+      <div className="p-5 border-b border-slate-200 flex items-center justify-between">
         {!isCollapsed && (
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/20">
+            <div className="p-2.5 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/20">
               <Box className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <h2 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-                AirPulse AI
+              <h2 className="text-lg font-black text-slate-900 tracking-tight">
+                AirPulse<span className="text-blue-600">.AI</span>
               </h2>
-              <p className="text-[10px] text-gray-400 font-mono">COMMAND CENTER v2.0</p>
+              <p className="text-[10px] text-slate-500 font-mono font-bold">COMMAND CENTER v2.0</p>
             </div>
           </div>
         )}
         {isCollapsed && (
-          <div className="mx-auto p-2 rounded-xl bg-cyan-500/20 text-cyan-400">
+          <div className="mx-auto p-2 rounded-xl bg-blue-50 text-blue-600">
             <Box className="w-6 h-6" />
           </div>
         )}
         <button
           onClick={onToggleCollapse}
-          className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-surfaceLight transition-all"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all"
         >
           {isCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
         </button>
@@ -98,19 +98,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Persona Role Switcher Card */}
       {!isCollapsed && (
-        <div className="mx-4 my-3 p-3 rounded-2xl bg-background/80 border border-surfaceLight flex items-center justify-between">
+        <div className="mx-4 my-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+            <div className="p-2 rounded-xl bg-blue-100 text-blue-600">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-[10px] text-gray-400 font-mono uppercase">Role Active</p>
-              <p className="text-xs font-bold text-white">{roleLabelMap[userRole]}</p>
+              <p className="text-[10px] text-slate-500 font-mono font-bold uppercase">Role Active</p>
+              <p className="text-xs font-bold text-slate-900">{roleLabelMap[userRole]}</p>
             </div>
           </div>
           <button
             onClick={onOpenRoleModal}
-            className="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-surfaceLight hover:bg-cyan-600 hover:text-white transition-all text-cyan-400"
+            className="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-white border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all text-blue-600 shadow-sm"
           >
             Switch
           </button>
@@ -126,22 +126,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <Link
               key={item.href}
               href={item.href}
-              className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
+              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all duration-200 group ${
                 isActive
-                  ? 'bg-gradient-to-r from-cyan-600/30 via-emerald-600/20 to-transparent text-cyan-400 border-l-4 border-cyan-400 shadow-lg shadow-cyan-500/10'
-                  : 'text-gray-400 hover:text-white hover:bg-surfaceLight/50'
+                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 shadow-sm font-extrabold'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
               title={isCollapsed ? item.label : undefined}
             >
-              <Icon className={`w-5 h-5 shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-cyan-400' : 'text-gray-400'}`} />
+              <Icon className={`w-5 h-5 shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
               {!isCollapsed && (
                 <span className="flex-1 text-left line-clamp-1">{item.label}</span>
               )}
               {!isCollapsed && item.badge && (
                 <span className={`px-2 py-0.5 text-[10px] font-extrabold rounded-full ${
                   item.badge === '3D WOW'
-                    ? 'bg-purple-500/20 text-purple-400 border border-purple-500/40 animate-pulse'
-                    : 'bg-surfaceLight text-gray-400'
+                    ? 'bg-purple-100 text-purple-700 border border-purple-200 animate-pulse'
+                    : 'bg-slate-200/80 text-slate-600'
                 }`}>
                   {item.badge}
                 </span>
@@ -153,8 +153,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Footer info */}
       {!isCollapsed && (
-        <div className="p-4 border-t border-surfaceLight/60 text-[11px] text-gray-400 font-mono text-center">
-          Rest API: <span className="text-emerald-400">http://localhost:5000</span>
+        <div className="p-4 border-t border-slate-200 text-[11px] text-slate-500 font-mono text-center font-semibold">
+          REST API: <span className="text-emerald-600">http://localhost:5000</span>
         </div>
       )}
     </aside>

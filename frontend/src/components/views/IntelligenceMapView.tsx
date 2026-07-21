@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Layers, MapPin, Wind, Flame, Navigation, Radio, Eye } from 'lucide-react';
+import { Layers, MapPin, Radio, Navigation, Eye } from 'lucide-react';
 import { HotspotRecord } from '../../types';
 
 interface IntelligenceMapViewProps {
@@ -23,46 +23,46 @@ export const IntelligenceMapView: React.FC<IntelligenceMapViewProps> = ({ hotspo
   const currentStation = selectedStation || stations[0];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900">
       
       {/* Header Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div>
-          <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-cyan-400" /> Air Quality Intelligence Geospatial Map
+          <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-blue-600" /> Air Quality Intelligence Geospatial Map
           </h2>
-          <p className="text-xs text-gray-400">Palantir Gotham Class GIS Layer Analysis & Station Telemetry</p>
+          <p className="text-xs text-slate-500 font-medium">Palantir Gotham Class GIS Layer Analysis & Station Telemetry</p>
         </div>
 
         {/* Layers Selector */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surfaceLight/60 border border-surfaceLight text-xs overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 border border-slate-200 text-xs overflow-x-auto no-scrollbar font-bold">
           <button
             onClick={() => setActiveLayer('heatmap')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${activeLayer === 'heatmap' ? 'bg-cyan-600 text-white' : 'text-gray-400'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all ${activeLayer === 'heatmap' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
             🔥 Heatmap
           </button>
           <button
             onClick={() => setActiveLayer('stations')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${activeLayer === 'stations' ? 'bg-cyan-600 text-white' : 'text-gray-400'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all ${activeLayer === 'stations' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
             📡 Stations
           </button>
           <button
             onClick={() => setActiveLayer('traffic')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${activeLayer === 'traffic' ? 'bg-cyan-600 text-white' : 'text-gray-400'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all ${activeLayer === 'traffic' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
             🚗 Traffic Layer
           </button>
           <button
             onClick={() => setActiveLayer('hotspots')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${activeLayer === 'hotspots' ? 'bg-cyan-600 text-white' : 'text-gray-400'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all ${activeLayer === 'hotspots' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
             💥 Hotspots
           </button>
           <button
             onClick={() => setActiveLayer('satellite')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${activeLayer === 'satellite' ? 'bg-cyan-600 text-white' : 'text-gray-400'}`}
+            className={`px-3 py-1.5 rounded-lg transition-all ${activeLayer === 'satellite' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
             🛰 Sentinel NO2
           </button>
@@ -73,23 +73,18 @@ export const IntelligenceMapView: React.FC<IntelligenceMapViewProps> = ({ hotspo
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Map Canvas Frame */}
-        <div className="lg:col-span-2 min-h-[460px] rounded-2xl bg-background/90 border border-surfaceLight relative overflow-hidden flex flex-col justify-between p-6 shadow-2xl">
+        <div className="lg:col-span-2 min-h-[460px] rounded-2xl bg-slate-100 border border-slate-200 relative overflow-hidden flex flex-col justify-between p-6 shadow-md">
           
-          {/* Simulated Dark Mode Map Grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:20px_20px] opacity-70" />
+          {/* Simulated Light Mode Map Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px] opacity-80" />
           
-          {/* Simulated Heatmap Plume Gradient Overlay */}
-          {activeLayer === 'heatmap' && (
-            <div className="absolute inset-0 bg-gradient-to-tr from-rose-950/40 via-amber-950/30 to-emerald-950/20 pointer-events-none blur-3xl animate-pulse" />
-          )}
-
           {/* Top Status */}
           <div className="z-10 flex items-center justify-between">
-            <span className="px-3 py-1.5 rounded-xl bg-surface/90 border border-surfaceLight text-xs font-mono text-cyan-400 flex items-center gap-1.5">
-              <Navigation className="w-3.5 h-3.5" /> LAT: {currentStation.lat} | LNG: {currentStation.lng}
+            <span className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-mono font-bold text-blue-600 flex items-center gap-1.5 shadow-sm">
+              <Navigation className="w-3.5 h-3.5 text-blue-600" /> LAT: {currentStation.lat} | LNG: {currentStation.lng}
             </span>
-            <span className="px-3 py-1.5 rounded-xl bg-surface/90 border border-surfaceLight text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-              <Radio className="w-3.5 h-3.5 animate-ping" /> LAYER ACTIVE: {activeLayer.toUpperCase()}
+            <span className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-mono font-bold text-emerald-600 flex items-center gap-1.5 shadow-sm">
+              <Radio className="w-3.5 h-3.5 animate-ping text-emerald-600" /> LAYER ACTIVE: {activeLayer.toUpperCase()}
             </span>
           </div>
 
@@ -101,17 +96,17 @@ export const IntelligenceMapView: React.FC<IntelligenceMapViewProps> = ({ hotspo
                 onClick={() => setSelectedStation(s)}
                 className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex flex-col gap-2 ${
                   currentStation.name === s.name
-                    ? 'bg-surface/90 border-cyan-400 shadow-lg shadow-cyan-500/20 scale-105'
-                    : 'bg-surface/60 border-surfaceLight/80 hover:bg-surface/80'
+                    ? 'bg-white border-blue-500 shadow-md ring-2 ring-blue-500/40 scale-105'
+                    : 'bg-white/90 border-slate-200 hover:bg-white'
                 }`}
               >
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-gray-300 font-bold">{s.name.split(' ')[0]}</span>
-                  <span className={`px-2 py-0.5 rounded-md font-bold ${s.aqi > 250 ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'}`}>
+                <div className="flex items-center justify-between text-xs font-mono font-bold">
+                  <span className="text-slate-900">{s.name.split(' ')[0]}</span>
+                  <span className={`px-2 py-0.5 rounded-md ${s.aqi > 250 ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'}`}>
                     {s.aqi} AQI
                   </span>
                 </div>
-                <div className="text-[11px] text-gray-400 flex justify-between">
+                <div className="text-[11px] text-slate-500 flex justify-between font-medium">
                   <span>PM2.5: {s.pm25} µg/m³</span>
                   <span>PM10: {s.pm10}</span>
                 </div>
@@ -120,53 +115,53 @@ export const IntelligenceMapView: React.FC<IntelligenceMapViewProps> = ({ hotspo
           </div>
 
           {/* Bottom Map Controls */}
-          <div className="z-10 flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-surfaceLight/60">
-            <span>Tile Layer: Esri Dark Gray Canvas / OpenStreetMap</span>
-            <span className="text-purple-400 font-mono">REST Endpoint: /api/hotspots & /api/aqi</span>
+          <div className="z-10 flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200 font-medium">
+            <span>Tile Layer: Esri Light Canvas / OpenStreetMap</span>
+            <span className="text-purple-600 font-mono font-bold">REST Endpoint: /api/hotspots & /api/aqi</span>
           </div>
         </div>
 
         {/* Right Station Popup Card Details */}
-        <div className="lg:col-span-1 rounded-2xl bg-surface/90 border border-surfaceLight backdrop-blur-xl p-6 shadow-2xl space-y-5 flex flex-col justify-between">
+        <div className="lg:col-span-1 rounded-2xl bg-white border border-slate-200 p-6 shadow-md space-y-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-400 border border-rose-500/40">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700 border border-rose-200">
                 {currentStation.status}
               </span>
-              <Eye className="w-4 h-4 text-cyan-400" />
+              <Eye className="w-4 h-4 text-blue-600" />
             </div>
-            <h3 className="text-lg font-bold text-white">{currentStation.name}</h3>
-            <p className="text-xs text-gray-400 mt-1">Real-time CEMS Ground Telemetry Sensor</p>
+            <h3 className="text-lg font-extrabold text-slate-900">{currentStation.name}</h3>
+            <p className="text-xs text-slate-500 font-medium mt-1">Real-time CEMS Ground Telemetry Sensor</p>
 
             {/* AQI Meter */}
-            <div className="my-5 p-4 rounded-xl bg-background/80 border border-surfaceLight text-center">
-              <span className="text-xs font-mono text-gray-400 uppercase">Live Station Index</span>
-              <h1 className="text-5xl font-extrabold text-rose-400 mt-1">{currentStation.aqi}</h1>
-              <p className="text-xs text-gray-300 mt-1">Category: {currentStation.status}</p>
+            <div className="my-5 p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span className="text-xs font-mono text-slate-500 font-bold uppercase">Live Station Index</span>
+              <h1 className="text-5xl font-black text-rose-600 mt-1">{currentStation.aqi}</h1>
+              <p className="text-xs text-slate-700 font-semibold mt-1">Category: {currentStation.status}</p>
             </div>
 
             {/* Station Metrics */}
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-surfaceLight/40 border border-surfaceLight">
-                <span className="text-gray-400">PM2.5 Level</span>
-                <p className="text-base font-bold text-cyan-400">{currentStation.pm25} µg/m³</p>
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <span className="text-slate-500 font-medium">PM2.5 Level</span>
+                <p className="text-base font-bold text-blue-600">{currentStation.pm25} µg/m³</p>
               </div>
-              <div className="p-3 rounded-lg bg-surfaceLight/40 border border-surfaceLight">
-                <span className="text-gray-400">PM10 Level</span>
-                <p className="text-base font-bold text-emerald-400">{currentStation.pm10} µg/m³</p>
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <span className="text-slate-500 font-medium">PM10 Level</span>
+                <p className="text-base font-bold text-emerald-600">{currentStation.pm10} µg/m³</p>
               </div>
-              <div className="p-3 rounded-lg bg-surfaceLight/40 border border-surfaceLight">
-                <span className="text-gray-400">Temperature</span>
-                <p className="text-base font-bold text-amber-400">{currentStation.temp}°C</p>
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <span className="text-slate-500 font-medium">Temperature</span>
+                <p className="text-base font-bold text-amber-600">{currentStation.temp}°C</p>
               </div>
-              <div className="p-3 rounded-lg bg-surfaceLight/40 border border-surfaceLight">
-                <span className="text-gray-400">Humidity</span>
-                <p className="text-base font-bold text-purple-400">{currentStation.humidity}%</p>
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <span className="text-slate-500 font-medium">Humidity</span>
+                <p className="text-base font-bold text-purple-600">{currentStation.humidity}%</p>
               </div>
             </div>
           </div>
 
-          <button className="w-full py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-lg shadow-cyan-600/30 transition-all">
+          <button className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition-all">
             Download Station Raw JSON Telemetry
           </button>
         </div>
