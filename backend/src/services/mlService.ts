@@ -13,7 +13,12 @@ export interface MLPredictionInput {
   humidity?: number;
   wind_speed?: number;
   rainfall?: number;
+  pressure?: number;
   aqi_lag1?: number;
+  aqi?: number;
+  cityName?: string;
+  greenCoverPercent?: number;
+  trafficDensityScore?: number;
 }
 
 export const getMLAQIForecast = async (input: MLPredictionInput) => {
@@ -30,9 +35,9 @@ export const getMLAQIForecast = async (input: MLPredictionInput) => {
       predictedAQI_48h: Math.round(aqi24h * 1.08),
       predictedAQI_72h: Math.round(aqi24h * 0.94),
       predictedAQI_7d: Math.round(aqi24h * 0.78),
-      riskLevel: aqi24h > 200 ? 'Very High' : 'High',
+      riskLevel: aqi24h > 200 ? 'Very Poor' : 'Poor',
       confidenceScore: 94.2,
-      source: 'Node.js Fallback Model'
+      modelUsed: 'Node.js Fallback Engine'
     };
   }
 };
@@ -52,7 +57,37 @@ export const getMLSourceAttribution = async (input: MLPredictionInput) => {
         { sector: 'Waste Burning', percentage: 7 },
         { sector: 'Others', percentage: 4 }
       ],
-      source: 'Node.js Fallback Model'
+      modelUsed: 'Node.js Fallback Engine'
+    };
+  }
+};
+
+export const getMLHealthRisk = async (input: MLPredictionInput) => {
+  try {
+    const response = await axios.post(`${ML_SERVICE_URL}/predict/health`, input, { timeout: 2000 });
+    return response.data.data;
+  } catch (error) {
+    return {
+      aqi: input.aqi || 178,
+      asthmaRiskScore: 78.0,
+      respiratoryRiskScore: 84.0,
+      hospitalLoadRisk: 62.0,
+      category: 'High Risk',
+      modelUsed: 'Node.js Fallback Engine'
+    };
+  }
+};
+
+export const getMLEnvScore = async (input: MLPredictionInput) => {
+  try {
+    const response = await axios.post(`${ML_SERVICE_URL}/predict/score`, input, { timeout: 2000 });
+    return response.data.data;
+  } catch (error) {
+    return {
+      score: 78,
+      category: 'Good',
+      cityName: input.cityName || 'Bhopal',
+      modelUsed: 'Node.js Fallback Engine'
     };
   }
 };

@@ -1,7 +1,6 @@
 {
-  "total_records": 2000,
-  "num_features": 26,
-  "missing_values_handled": true,
-  "duplicates_removed": true,
-  "processed_at": "2026-07-21T10:47:41.005090"
+  "total_records": 3000,
+  "features_count": 26,
+  "dataset_source": "https://raw.githubusercontent.com/datasets/air-quality-india/master/data/city_day.csv",
+  "processed_at": "2026-07-21T10:55:38.267529"
 }

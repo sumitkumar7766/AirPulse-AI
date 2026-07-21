@@ -1,15 +1,15 @@
 {
-  "model_name": "RandomForest",
+  "model_name": "GradientBoosting",
   "version": "2.0.0",
-  "r2_score": -0.0085,
+  "r2_score": -0.0516,
   "metrics": {
-    "MAE": 57.2,
-    "MSE": 5073.71,
-    "RMSE": 71.23,
-    "R2_Score": -0.0085,
-    "MAPE": 27.95
+    "MAE": 65.06,
+    "MSE": 6627.4,
+    "RMSE": 81.41,
+    "R2_Score": -0.0516,
+    "MAPE": 30.91
   },
-  "training_date": "2026-07-21T10:47:42.794038",
+  "training_date": "2026-07-21T10:55:40.788762",
   "features_count": 18,
   "dataset_version": "Indian_AQI_CPCB_OpenAQ_v2"
 }
