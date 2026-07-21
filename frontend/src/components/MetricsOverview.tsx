@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MotionDiv } from './MotionWrapper';
-import { Activity, Flame, ShieldAlert, TrendingUp } from 'lucide-react';
+import { Sun, Clock, ShieldAlert, Bell, Users, Leaf } from 'lucide-react';
 import { DashboardData } from '../types';
 
 interface MetricsOverviewProps {
@@ -13,102 +12,132 @@ interface MetricsOverviewProps {
 export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ data, isLoading }) => {
   const currentAQI = data?.currentAQI ?? 178;
   const predictedAQI = data?.predictedAQI ?? 205;
-  const hotspotsCount = data?.hotspots ?? 8;
-  const alertsCount = data?.alerts ?? 3;
-
-  const getAQIBadge = (val: number) => {
-    if (val <= 50) return { bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: 'Good' };
-    if (val <= 100) return { bg: 'bg-amber-50 text-amber-700 border-amber-200', label: 'Moderate' };
-    if (val <= 150) return { bg: 'bg-orange-50 text-orange-700 border-orange-200', label: 'Unhealthy for Sensitive' };
-    if (val <= 200) return { bg: 'bg-rose-50 text-rose-700 border-rose-200', label: 'Unhealthy' };
-    return { bg: 'bg-purple-50 text-purple-700 border-purple-200', label: 'Very Unhealthy' };
-  };
-
-  const currentBadge = getAQIBadge(currentAQI);
-  const predictedBadge = getAQIBadge(predictedAQI);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 my-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 my-4">
       
-      {/* 1. Current AQI Card */}
-      <MotionDiv
-        whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        className="p-6 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl transition-all relative overflow-hidden group"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div className="p-3 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
-            <Activity className="w-6 h-6 animate-pulse" />
+      {/* 1. Current AQI */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">Current AQI</span>
+          <div className="p-2 rounded-2xl bg-amber-50 text-amber-500">
+            <Sun className="w-4 h-4" />
           </div>
-          <span className={`px-3 py-1 rounded-full text-xs font-bold border ${currentBadge.bg}`}>
-            {currentBadge.label}
+        </div>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">{isLoading ? '--' : currentAQI}</h2>
+          <span className="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+            Moderate
           </span>
         </div>
-        <p className="text-xs uppercase font-bold text-slate-500 tracking-wider">Current AQI Index</p>
-        <div className="flex items-baseline gap-3 mt-1">
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight">{isLoading ? '---' : currentAQI}</h2>
-          <span className="text-xs text-rose-600 font-bold">Live Telemetry</span>
-        </div>
-      </MotionDiv>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-amber-400 stroke-current fill-none stroke-2">
+          <path d="M 0 15 Q 25 5, 50 12 T 100 8" />
+        </svg>
+      </div>
 
-      {/* 2. Predicted AQI Card */}
-      <MotionDiv
-        whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        className="p-6 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl transition-all relative overflow-hidden group"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div className="p-3 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
-            <TrendingUp className="w-6 h-6" />
+      {/* 2. Predicted AQI (24h) */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">Predicted AQI <span className="text-[9px] text-slate-400">(24h)</span></span>
+          <div className="p-2 rounded-2xl bg-rose-50 text-rose-500">
+            <Clock className="w-4 h-4" />
           </div>
-          <span className={`px-3 py-1 rounded-full text-xs font-bold border ${predictedBadge.bg}`}>
-            {predictedBadge.label}
-          </span>
         </div>
-        <p className="text-xs uppercase font-bold text-slate-500 tracking-wider">Predicted AQI (+24h)</p>
-        <div className="flex items-baseline gap-3 mt-1">
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight">{isLoading ? '---' : predictedAQI}</h2>
-          <span className="text-xs text-purple-600 font-bold">+15% Trend</span>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">{isLoading ? '--' : predictedAQI}</h2>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-rose-50 text-rose-600 border border-rose-200">
+              Poor
+            </span>
+            <span className="text-[10px] font-bold text-rose-500">↗ 15%</span>
+          </div>
         </div>
-      </MotionDiv>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-rose-400 stroke-current fill-none stroke-2">
+          <path d="M 0 18 Q 30 8, 60 14 T 100 4" />
+        </svg>
+      </div>
 
-      {/* 3. Hotspots Card */}
-      <MotionDiv
-        whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        className="p-6 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl transition-all relative overflow-hidden group"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div className="p-3 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
-            <Flame className="w-6 h-6" />
+      {/* 3. High Risk Zones */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">High Risk Zones</span>
+          <div className="p-2 rounded-2xl bg-purple-50 text-purple-500">
+            <ShieldAlert className="w-4 h-4" />
           </div>
-          <span className="px-3 py-1 rounded-full text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200">
-            Geospatial Clusters
+        </div>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">08</h2>
+          <span className="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-purple-50 text-purple-600 border border-purple-200">
+            Zones
           </span>
         </div>
-        <p className="text-xs uppercase font-bold text-slate-500 tracking-wider">Active Hotspots</p>
-        <div className="flex items-baseline gap-3 mt-1">
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight">{isLoading ? '---' : hotspotsCount}</h2>
-          <span className="text-xs text-amber-600 font-bold">Critical Sectors</span>
-        </div>
-      </MotionDiv>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-purple-400 stroke-current fill-none stroke-2">
+          <path d="M 0 12 Q 25 18, 50 8 T 100 10" />
+        </svg>
+      </div>
 
-      {/* 4. Active Alerts Card */}
-      <MotionDiv
-        whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        className="p-6 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl transition-all relative overflow-hidden group"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <div className="p-3 rounded-xl bg-blue-50 text-blue-600 border border-blue-100">
-            <ShieldAlert className="w-6 h-6" />
+      {/* 4. Inspection Alerts */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">Inspection Alerts</span>
+          <div className="p-2 rounded-2xl bg-orange-50 text-orange-500">
+            <Bell className="w-4 h-4" />
           </div>
-          <span className="px-3 py-1 rounded-full text-xs font-bold border bg-blue-50 text-blue-700 border-blue-200">
-            Emergency System
+        </div>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">05</h2>
+          <span className="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-orange-50 text-orange-600 border border-orange-200">
+            Pending
           </span>
         </div>
-        <p className="text-xs uppercase font-bold text-slate-500 tracking-wider">Active Advisories</p>
-        <div className="flex items-baseline gap-3 mt-1">
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight">{isLoading ? '---' : alertsCount}</h2>
-          <span className="text-xs text-blue-600 font-bold">Health Advisories</span>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-orange-400 stroke-current fill-none stroke-2">
+          <path d="M 0 10 Q 30 16, 60 6 T 100 14" />
+        </svg>
+      </div>
+
+      {/* 5. Affected Citizens */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">Affected Citizens</span>
+          <div className="p-2 rounded-2xl bg-emerald-50 text-emerald-500">
+            <Users className="w-4 h-4" />
+          </div>
         </div>
-      </MotionDiv>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">2.4M</h2>
+          <span className="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+            People
+          </span>
+        </div>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-emerald-400 stroke-current fill-none stroke-2">
+          <path d="M 0 16 Q 30 6, 60 14 T 100 8" />
+        </svg>
+      </div>
+
+      {/* 6. Air Quality Score */}
+      <div className="p-4 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-2 relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-500">Air Quality Score</span>
+          <div className="p-2 rounded-2xl bg-teal-50 text-teal-500">
+            <Leaf className="w-4 h-4" />
+          </div>
+        </div>
+        <div>
+          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">62</h2>
+          <span className="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-teal-50 text-teal-600 border border-teal-200">
+            Good
+          </span>
+        </div>
+        {/* Wavy Sparkline SVG */}
+        <svg viewBox="0 0 100 20" className="w-full h-4 text-teal-400 stroke-current fill-none stroke-2">
+          <path d="M 0 14 Q 25 4, 50 16 T 100 6" />
+        </svg>
+      </div>
 
     </div>
   );

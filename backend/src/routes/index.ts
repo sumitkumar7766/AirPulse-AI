@@ -11,6 +11,7 @@ import seedRoutes from './seedRoutes';
 import cityRoutes from './cityRoutes';
 import pollutionSourceRoutes from './pollutionSourceRoutes';
 import enforcementRoutes from './enforcementRoutes';
+import uspRoutes from './uspRoutes';
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.use('/recommendations', analyticsRoutes);
 router.use('/analytics', analyticsRoutes);
 router.use('/cities', cityRoutes);
 router.use('/enforcement', enforcementRoutes);
+router.use('/usp', uspRoutes);
 router.use('/seed', seedRoutes);
 
 export default router;
