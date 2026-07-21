@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
   MapPin,
@@ -22,25 +24,7 @@ import {
 } from 'lucide-react';
 import { UserRole } from '../types';
 
-export type ActiveModule =
-  | 'dashboard'
-  | 'map'
-  | 'forecast'
-  | 'hotspots'
-  | 'attribution'
-  | 'satellite'
-  | 'copilot'
-  | 'health'
-  | 'analytics'
-  | 'multicity'
-  | 'recommendations'
-  | 'digitaltwin'
-  | 'enforcement'
-  | 'settings';
-
 interface SidebarProps {
-  activeModule: ActiveModule;
-  onSelectModule: (mod: ActiveModule) => void;
   userRole: UserRole;
   onOpenRoleModal: () => void;
   isCollapsed: boolean;
@@ -48,28 +32,28 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
-  activeModule,
-  onSelectModule,
   userRole,
   onOpenRoleModal,
   isCollapsed,
   onToggleCollapse
 }) => {
+  const pathname = usePathname();
+
   const menuItems = [
-    { id: 'dashboard' as ActiveModule, label: 'Dashboard', icon: LayoutDashboard, badge: null },
-    { id: 'map' as ActiveModule, label: 'Air Quality Map', icon: MapPin, badge: 'Live' },
-    { id: 'forecast' as ActiveModule, label: 'AQI Forecasting', icon: TrendingUp, badge: 'AI' },
-    { id: 'hotspots' as ActiveModule, label: 'Pollution Hotspots', icon: Flame, badge: '8' },
-    { id: 'attribution' as ActiveModule, label: 'Source Attribution', icon: Factory, badge: null },
-    { id: 'enforcement' as ActiveModule, label: 'Enforcement Intel', icon: Siren, badge: 'Priority' },
-    { id: 'digitaltwin' as ActiveModule, label: '3D Digital Twin', icon: Box, badge: '3D WOW' },
-    { id: 'satellite' as ActiveModule, label: 'Satellite Intel', icon: Satellite, badge: null },
-    { id: 'copilot' as ActiveModule, label: 'AI Copilot', icon: Bot, badge: 'Agent' },
-    { id: 'health' as ActiveModule, label: 'Citizen Advisory', icon: HeartPulse, badge: null },
-    { id: 'multicity' as ActiveModule, label: 'Multi-City Intel', icon: Globe2, badge: '9 Cities' },
-    { id: 'recommendations' as ActiveModule, label: 'Smart City Plan', icon: Trees, badge: null },
-    { id: 'analytics' as ActiveModule, label: 'Analytics & Rankings', icon: BarChart3, badge: null },
-    { id: 'settings' as ActiveModule, label: 'Settings', icon: Settings, badge: null }
+    { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: null },
+    { href: '/map', label: 'Air Quality Map', icon: MapPin, badge: 'Live' },
+    { href: '/forecast', label: 'AQI Forecasting', icon: TrendingUp, badge: 'AI' },
+    { href: '/hotspots', label: 'Pollution Hotspots', icon: Flame, badge: '8' },
+    { href: '/attribution', label: 'Source Attribution', icon: Factory, badge: null },
+    { href: '/enforcement', label: 'Enforcement Intel', icon: Siren, badge: 'Priority' },
+    { href: '/digital-twin', label: '3D Digital Twin', icon: Box, badge: '3D WOW' },
+    { href: '/satellite', label: 'Satellite Intel', icon: Satellite, badge: null },
+    { href: '/copilot', label: 'AI Copilot', icon: Bot, badge: 'Agent' },
+    { href: '/health', label: 'Citizen Advisory', icon: HeartPulse, badge: null },
+    { href: '/multi-city', label: 'Multi-City Intel', icon: Globe2, badge: '9 Cities' },
+    { href: '/recommendations', label: 'Smart City Plan', icon: Trees, badge: null },
+    { href: '/analytics', label: 'Analytics & Rankings', icon: BarChart3, badge: null },
+    { href: '/settings', label: 'Settings', icon: Settings, badge: null }
   ];
 
   const roleLabelMap: Record<UserRole, string> = {
@@ -137,11 +121,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1 custom-scrollbar">
         {menuItems.map((item) => {
           const Icon = item.icon;
-          const isActive = activeModule === item.id;
+          const isActive = pathname === item.href;
           return (
-            <button
-              key={item.id}
-              onClick={() => onSelectModule(item.id)}
+            <Link
+              key={item.href}
+              href={item.href}
               className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                 isActive
                   ? 'bg-gradient-to-r from-cyan-600/30 via-emerald-600/20 to-transparent text-cyan-400 border-l-4 border-cyan-400 shadow-lg shadow-cyan-500/10'
@@ -162,7 +146,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {item.badge}
                 </span>
               )}
-            </button>
+            </Link>
           );
         })}
       </div>
