@@ -1,0 +1,31 @@
+{
+  "best_model": "RandomForest",
+  "metrics": {
+    "RandomForest": {
+      "MAE": 57.85,
+      "RMSE": 72.98,
+      "R2_Score": -0.0545
+    },
+    "GradientBoosting": {
+      "MAE": 59.77,
+      "RMSE": 75.98,
+      "R2_Score": -0.1428
+    }
+  },
+  "features_used": [
+    "pm25",
+    "pm10",
+    "no2",
+    "so2",
+    "co",
+    "o3",
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "rainfall",
+    "aqi_lag1",
+    "aqi_lag24"
+  ],
+  "trained_at": "2026-07-21T10:35:17.690676",
+  "dataset_version": "1.0.0"
+}

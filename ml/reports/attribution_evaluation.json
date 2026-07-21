@@ -1,0 +1,11 @@
+{
+  "accuracy": 1.0,
+  "classes": [
+    "Traffic",
+    "Construction",
+    "Industrial",
+    "Waste Burning",
+    "Residential"
+  ],
+  "trained_at": "2026-07-21T10:47:50.059109"
+}

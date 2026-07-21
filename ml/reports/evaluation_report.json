@@ -1,0 +1,16 @@
+{
+  "RandomForest": {
+    "MAE": 57.2,
+    "MSE": 5073.71,
+    "RMSE": 71.23,
+    "R2_Score": -0.0085,
+    "MAPE": 27.95
+  },
+  "GradientBoosting": {
+    "MAE": 59.12,
+    "MSE": 5382.19,
+    "RMSE": 73.36,
+    "R2_Score": -0.0699,
+    "MAPE": 28.52
+  }
+}

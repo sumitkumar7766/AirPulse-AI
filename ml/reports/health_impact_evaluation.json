@@ -1,0 +1,9 @@
+{
+  "target_outputs": [
+    "asthma_risk",
+    "respiratory_risk",
+    "hospital_load"
+  ],
+  "n_samples": 500,
+  "trained_at": "2026-07-21T10:47:53.786383"
+}
